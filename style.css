@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+/* ========== RESET ========== */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* ========== BACKGROUND ========== */
 .background {
   position: fixed;
   inset: 0;
@@ -31,7 +31,7 @@ body {
   );
 }
 
-/* ================= INTRO ================= */
+/* ========== INTRO ========== */
 .intro {
   position: fixed;
   inset: 0;
@@ -48,7 +48,7 @@ body {
   pointer-events: none;
 }
 
-/* ================= PROFILE ================= */
+/* ========== PROFILE ========== */
 .profile {
   width: 180px;
   aspect-ratio: 1;
@@ -58,7 +58,6 @@ body {
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity;
 }
 
 .profile.show {
@@ -77,21 +76,18 @@ body {
     transform 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.15),
     width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, width, border-radius;
 }
 
-/* ================= WELCOME CAPTION ================= */
+/* ========== WELCOME TEXT ========== */
 .welcome {
   margin-top: 24px;
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
-
   background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 6px 30px rgba(125, 211, 252, 0.25);
-
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -107,7 +103,7 @@ body {
   transform: translateY(-10px);
 }
 
-/* ================= TASKBAR ================= */
+/* ========== TASKBAR ========== */
 .taskbar {
   position: fixed;
   bottom: -80px;
@@ -125,7 +121,6 @@ body {
   font-weight: bold;
   letter-spacing: 1px;
   transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 5;
 }
 
 .taskbar.show {
@@ -133,10 +128,9 @@ body {
 }
 
 .taskbar a {
-  position: relative;
   color: rgba(230, 238, 243, 0.75);
   text-decoration: none;
-  transition: color 0.3s ease;
+  position: relative;
 }
 
 .taskbar a::after {
@@ -152,16 +146,12 @@ body {
   transition: transform 0.35s ease;
 }
 
-.taskbar a:hover {
-  color: #ffffff;
-}
-
 .taskbar a:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* ================= ABOUT ME ================= */
+/* ========== ABOUT ME ========== */
 .about {
   display: none;
   padding: 140px 40px 80px;
@@ -169,6 +159,7 @@ body {
   margin: 0 auto;
 }
 
+/* Heading typing */
 .about h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
@@ -179,21 +170,32 @@ body {
   width: 0;
   animation:
     typingAbout 1.8s steps(8, end) forwards,
-    blinkCursor 0.7s step-end infinite;
+    stopCursor 0.01s linear forwards 1.9s;
 }
 
 @keyframes typingAbout {
   to { width: 8ch; }
 }
 
-@keyframes blinkCursor {
-  50% { border-color: transparent; }
+@keyframes stopCursor {
+  to { border-right-color: transparent; }
 }
 
-.about p {
-  font-size: 16px;
-  line-height: 1.75;
+/* Paragraph reveal with SOFT SHADOW */
+.about-text {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: paragraphReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 2s;
   color: rgba(230, 238, 243, 0.88);
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.25); /* light dark shadow */
+}
+
+@keyframes paragraphReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Certificates grid */
