@@ -18,18 +18,24 @@
   transform: scale(1);
 }
 
-/* Profile second animation (move) */
+/* Profile second animation (move to top-left) */
 .profile.move {
   position: fixed;
   top: 20px;
   left: 20px;
   width: 90px;
   border-radius: 35%;
+
+  transform: translate3d(0, 0, 0);
+
   transition:
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.8s ease,
-    border-radius 0.8s ease;
+    transform 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.15),
+    width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform;
 }
+
 
 /* Caption base */
 .caption {
