@@ -1,27 +1,42 @@
-const certificates = [
-  {
-    name: "Android Developer Virtual Internship",
-    file: "android-internship.jpg"
-  },
-  {
-    name: "Smart India Hackathon",
-    file: "sih-hackathon.jpg"
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const profile = document.getElementById("profile");
+  const welcome = document.getElementById("welcome");
+  const intro = document.getElementById("intro");
+  const taskbar = document.getElementById("taskbar");
+  const about = document.getElementById("about");
 
-// Auto-generate certificate cards
-const container = document.getElementById("certContainer");
+  // 1. Profile appears
+  setTimeout(() => {
+    profile.classList.add("show");
+  }, 400);
 
-certificates.forEach(cert => {
-  const card = document.createElement("a");
-  card.href = `certificates/${cert.file}`;
-  card.target = "_blank";
-  card.className = "cert-card";
+  // 2. Welcome appears
+  setTimeout(() => {
+    welcome.classList.add("show");
+  }, 900);
 
-  card.innerHTML = `
-    <h3>${cert.name}</h3>
-    <p>Click to view</p>
-  `;
+  // 3. Profile moves AFTER welcome finishes
+  setTimeout(() => {
+    profile.classList.add("move");
+  }, 1700);
 
-  container.appendChild(card);
+  // 4. Welcome hides
+  setTimeout(() => {
+    welcome.classList.add("hide");
+  }, 1850);
+
+  // 5. Intro exits
+  setTimeout(() => {
+    intro.classList.add("hide");
+  }, 2350);
+
+  // 6. Taskbar shows
+  setTimeout(() => {
+    taskbar.classList.add("show");
+  }, 2550);
+
+  // 7. About section shows
+  setTimeout(() => {
+    about.style.display = "block";
+  }, 2900);
 });
