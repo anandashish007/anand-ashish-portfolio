@@ -40,7 +40,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
 }
 
 .intro.hide {
@@ -48,30 +48,43 @@ body {
   pointer-events: none;
 }
 
-/* ========== PROFILE ========== */
+/* ========== PROFILE (PERSISTENT) ========== */
 .profile {
+  position: fixed;                 /* IMPORTANT */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+
   width: 180px;
   aspect-ratio: 1;
   border-radius: 50%;
   opacity: 0;
-  transform: scale(0.9);
+
+  z-index: 20;                     /* ABOVE intro */
+
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform, opacity;
 }
 
+/* Profile appears (center) */
 .profile.show {
   opacity: 1;
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
+/* Profile moves to top-left + shrinks */
 .profile.move {
-  position: fixed;
   top: 20px;
   left: 20px;
+
   width: 82px;
   border-radius: 28%;
-  transform: scale(0.95);
+
+  transform: translate(0, 0) scale(0.95);
+
   transition:
     transform 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.15),
     width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
