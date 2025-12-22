@@ -31,21 +31,19 @@ body {
   );
 }
 
-/* ========== INTRO ========== */
 .intro {
   position: fixed;
   inset: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  transition: opacity 0.5s ease;
-}
 
-.intro.hide {
-  opacity: 0;
-  pointer-events: none;
+  gap: 28px;               /* THIS is the missing piece */
+
+  z-index: 10;
+  transition: opacity 0.4s ease;
 }
 
 /* ========== PROFILE (PERSISTENT) ========== */
@@ -91,30 +89,30 @@ body {
     border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ========== WELCOME TEXT ========== */
 .welcome {
-  margin-top: 24px;
+  position: relative;
+  margin-top: 110px;              /* pushes it BELOW the profile */
+
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
+  text-align: center;
+
   background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   text-shadow: 0 6px 30px rgba(125, 211, 252, 0.25);
+
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+
+  z-index: 5;                     /* below profile */
 }
 
-.welcome.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.welcome.hide {
-  opacity: 0;
-  transform: translateY(-10px);
-}
 
 /* ========== TASKBAR ========== */
 .taskbar {
@@ -177,17 +175,20 @@ body {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
   margin-bottom: 24px;
+
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid rgba(159, 217, 245, 0.9);
+
   width: 0;
+
   animation:
-    typingAbout 1.8s steps(8, end) forwards,
+    typingAbout 1.8s steps(9, end) forwards,
     stopCursor 0.01s linear forwards 1.9s;
 }
 
 @keyframes typingAbout {
-  to { width: 8ch; }
+  to { width: 9ch; }
 }
 
 @keyframes stopCursor {
