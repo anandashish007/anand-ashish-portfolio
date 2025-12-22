@@ -1,3 +1,39 @@
+/* =======================
+   GLOBAL RESET
+======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* =======================
+   BACKGROUND
+======================= */
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("bg.jpg") center / cover no-repeat;
+  filter: blur(25px) brightness(0.85);
+  z-index: -2;
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* =======================
+   INTRO CONTAINER
+======================= */
 .intro {
   position: fixed;
   inset: 0;
@@ -14,17 +50,19 @@
   pointer-events: none;
 }
 
-
-/* Profile initial state */
+/* =======================
+   PROFILE – INITIAL
+======================= */
 .profile {
   width: 180px;
+  aspect-ratio: 1;
   border-radius: 50%;
   opacity: 0;
   transform: scale(0.9);
+
   transition:
-   transition:
-  opacity 0.5s  cubic-bezier(0.22, 1, 0.36, 1),
-  transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 
   will-change: transform, opacity;
 }
@@ -35,97 +73,152 @@
   transform: scale(1);
 }
 
-/* Profile second animation (move to top-left) */
+/* =======================
+   PROFILE – SECOND ANIMATION
+   (MOVE + SHRINK + MASK)
+======================= */
 .profile.move {
   position: fixed;
   top: 20px;
   left: 20px;
+
   width: 90px;
   border-radius: 35%;
 
-  transform: translate3d(0, 0, 0);
+  transform: scale(1);
 
   transition:
-    transform 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.15),
-    width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.15),
+    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 
-  will-change: transform;
+  will-change: transform, width, border-radius;
 }
 
-
-/* Caption base */
-.caption {
-  margin-top: 25px;
-  font-family: Bebas Neue, sans-serif;
-  font-size: 36px;
-  background: linear-gradient(90deg, #00c6ff, #0072ff, #00ffd5);
-  -webkit-background-clip: text;
-  color: transparent;
+/* =======================
+   CAPTION
+======================= */
+.welcome {
+  margin-top: 24px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 34px;
+  letter-spacing: 3px;
 
   opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity 0.7s ease-out,
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-
-  will-change: transform, opacity;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Caption enters */
-.caption.show {
+.welcome.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Caption exits */
-.caption.hide {
+.welcome.hide {
   opacity: 0;
-  transform: translateY(-12px);
-}
- 
-.taskbar.show {
-  top: 0;
+  transform: translateY(-10px);
 }
 
-/* Background layer */
-.background {
+/* =======================
+   TASKBAR (PROFESSIONAL)
+======================= */
+.taskbar {
   position: fixed;
-  inset: 0;
-  background: url("bg.jpg") center / cover no-repeat;
-  filter: blur(20px);
-  z-index: -1;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 56px;
+  padding: 0 36px;
+
+  display: flex;
+  align-items: center;
+  gap: 36px;
+
+  background: rgba(10, 20, 30, 0.65);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 5;
 }
 
-/* About Me heading - typewriter effect */
+.taskbar.show {
+  bottom: 24px;
+}
+
+.taskbar a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.taskbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+
+.taskbar a:hover {
+  color: #ffffff;
+}
+
+.taskbar a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* =======================
+   ABOUT ME SECTION
+======================= */
+.about {
+  display: none;
+  padding: 140px 40px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ABOUT ME heading – CSS typewriter */
 .about h2 {
-  font-family: Bebas Neue, sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
-  overflow: hidden;
   white-space: nowrap;
+  overflow: hidden;
   border-right: 3px solid rgba(255, 255, 255, 0.8);
-
   width: 0;
+
   animation:
     typingAbout 1.8s steps(8, end) forwards,
     blinkCursor 0.7s step-end infinite;
 }
 
-/* Typewriter animation */
 @keyframes typingAbout {
   from { width: 0; }
-  to { width: 8ch; } /* ABOUT ME = 8 characters */
+  to { width: 8ch; }
 }
 
-/* Cursor blink */
 @keyframes blinkCursor {
   50% { border-color: transparent; }
 }
 
-.taskbar a:hover {
-  text-shadow: 0 0 8px rgba(0,198,255,0.6);
+/* About Me text */
+.about p {
+  font-size: 16px;
+  line-height: 1.75;
+  opacity: 0.9;
 }
 
 /* Certificates grid */
