@@ -4,18 +4,24 @@
   <meta charset="UTF-8">
   <title>Resume</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      height: 100vh;
+      height: 100%;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
+      z-index: 9999;
       font-family: "Times New Roman", serif;
     }
 
-    h1 {
+    .overlay h1 {
       font-size: 48px;
       color: rgba(255, 255, 255, 0.7);
       letter-spacing: 2px;
@@ -24,7 +30,9 @@
 </head>
 <body>
 
-  <h1>Resume Coming Soon</h1>
+  <div class="overlay">
+    <h1>Resume Coming Soon</h1>
+  </div>
 
 </body>
 </html>
