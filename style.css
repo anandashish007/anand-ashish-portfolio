@@ -96,3 +96,27 @@ body {
   font-family: Bebas Neue, sans-serif;
   font-size: 42px;
 }
+/* Certificates grid */
+.cert-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px;
+}
+
+.cert-card {
+  width: 260px;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  background: rgba(255,255,255,0.1);
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
