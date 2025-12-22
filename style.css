@@ -1,75 +1,36 @@
-body {
-  margin: 0;
-  font-family: Open Sans, sans-serif;
-  color: white;
-  overflow-x: hidden;
-}
-
-.background {
-  position: fixed;
-  inset: 0;
-  background: url("bg.jpg") center/cover no-repeat;
-  filter: blur(25px);
-  z-index: -1;
-}
-
-.intro {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Profile initial state */
 .profile {
   width: 180px;
   border-radius: 50%;
-  animation: fadeScale 1.5s ease forwards;
-  transition: all 1.2s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  will-change: transform, opacity;
 }
 
-@keyframes smoothFadeUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+/* Profile appears */
+.profile.show {
+  opacity: 1;
+  transform: scale(1);
 }
 
+/* Profile second animation (move) */
 .profile.move {
   position: fixed;
   top: 20px;
   left: 20px;
   width: 90px;
   border-radius: 35%;
-}
-.overlay {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-.overlay h1 {
-  animation: smoothFadeUp 0.8s ease-out forwards;
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.8s ease,
+    border-radius 0.8s ease;
 }
 
-* {
-  backface-visibility: hidden;
-}
-
-.welcome {
-  margin-top: 25px;
-  font-family: Bebas Neue, sans-serif;
-  font-size: 36px;
-  background: linear-gradient(90deg, #00c6ff, #0072ff, #00ffd5);
-  -webkit-background-clip: text;
-  color: transparent;
-  opacity: 0;
-}
-
-}
-.welcome {
+/* Caption base */
+.caption {
   margin-top: 25px;
   font-family: Bebas Neue, sans-serif;
   font-size: 36px;
@@ -78,57 +39,45 @@ body {
   color: transparent;
 
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
   will-change: transform, opacity;
 }
 
-/* When shown */
-.welcome.show {
-  animation: welcomeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Caption enters */
+.caption.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Slide-up animation */
-@keyframes welcomeSlideUp {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+/* Caption exits */
+.caption.hide {
+  opacity: 0;
+  transform: translateY(-12px);
 }
-
-.welcome.hide {
-  animation: shatter 0.8s forwards;
-}
-
-@keyframes shatter {
-  to { opacity: 0; letter-spacing: 20px; }
-}
-
-.taskbar {
-  position: fixed;
-  bottom: -60px;
-  width: 100%;
-  height: 55px;
-  background: rgba(0, 50, 80, 0.6);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  font-family: "Times New Roman", serif;
-  font-weight: bold;
-  transition: bottom 1s ease;
-}
-
+ 
 .taskbar.show {
-  bottom: 0;
+  top: 0;
 }
 
-.taskbar a {
-  color: white;
-  text-decoration: none;
+/* Background layer */
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("bg.jpg") center / cover no-repeat;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.taskbar a:hover {
+  text-shadow: 0 0 8px rgba(0,198,255,0.6);
 }
 
 .about {
-  display: none;
+  display:aboutme.html;
   padding: 120px 40px;
 }
 
