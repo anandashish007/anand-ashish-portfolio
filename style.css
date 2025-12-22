@@ -28,7 +28,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: linear-gradient(90deg, #7DD3FC, #38BDF8);
 }
 
 /* =======================
@@ -104,6 +104,15 @@ body {
   font-size: 34px;
   letter-spacing: 3px;
 
+  background: linear-gradient(
+    90deg,
+    #E6EEF3,
+    #9FD9F5,
+    #E6EEF3
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -138,7 +147,7 @@ body {
   backdrop-filter: blur(14px);
   border-radius: 16px;
 
-  font-family: "Times New Roman", serif;
+  font-family: "helvetica", serif;
   font-weight: bold;
   letter-spacing: 1px;
 
@@ -152,7 +161,7 @@ body {
 
 .taskbar a {
   position: relative;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(230, 238, 243, 0.75);
   text-decoration: none;
   transition: color 0.3s ease;
 }
