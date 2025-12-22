@@ -1,4 +1,4 @@
-/* ========== RESET ========== */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -11,12 +11,12 @@ body {
   overflow-x: hidden;
 }
 
-/* ========== BACKGROUND ========== */
+/* ================= BACKGROUND ================= */
 .background {
   position: fixed;
   inset: 0;
   background: url("bg.jpg") center / cover no-repeat;
-  filter: blur(25px) brightness(0.85);
+  filter: blur(22px) brightness(0.85);
   z-index: -2;
 }
 
@@ -31,24 +31,26 @@ body {
   );
 }
 
+/* ================= INTRO ================= */
 .intro {
   position: fixed;
   inset: 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  gap: 28px;               /* THIS is the missing piece */
-
   z-index: 10;
   transition: opacity 0.4s ease;
 }
 
-/* ========== PROFILE (PERSISTENT) ========== */
+.intro.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ================= PROFILE ================= */
 .profile {
-  position: fixed;                 /* IMPORTANT */
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
@@ -58,22 +60,18 @@ body {
   border-radius: 50%;
   opacity: 0;
 
-  z-index: 20;                     /* ABOVE intro */
+  z-index: 20;
 
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-
-  will-change: transform, opacity;
 }
 
-/* Profile appears (center) */
 .profile.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* Profile moves to top-left + shrinks */
 .profile.move {
   top: 20px;
   left: 20px;
@@ -89,10 +87,9 @@ body {
     border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ================= WELCOME ================= */
 .welcome {
-  position: relative;
-  margin-top: 110px;              /* pushes it BELOW the profile */
-
+  margin-top: 140px; /* sits BELOW profile */
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
@@ -101,20 +98,26 @@ body {
   background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   text-shadow: 0 6px 30px rgba(125, 211, 252, 0.25);
 
   opacity: 0;
   transform: translateY(16px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
-  z-index: 5;                     /* below profile */
+  z-index: 5;
 }
 
+.welcome.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* ========== TASKBAR ========== */
+.welcome.hide {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ================= TASKBAR ================= */
 .taskbar {
   position: fixed;
   bottom: -80px;
@@ -125,12 +128,15 @@ body {
   display: flex;
   align-items: center;
   gap: 36px;
+
   background: rgba(10, 20, 30, 0.65);
   backdrop-filter: blur(14px);
   border-radius: 16px;
+
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
+
   transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -162,7 +168,7 @@ body {
   transform-origin: left;
 }
 
-/* ========== ABOUT ME ========== */
+/* ================= ABOUT ME ================= */
 .about {
   display: none;
   padding: 140px 40px 80px;
@@ -170,7 +176,7 @@ body {
   margin: 0 auto;
 }
 
-/* Heading typing */
+/* ABOUT ME heading typing */
 .about h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
@@ -179,7 +185,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid rgba(159, 217, 245, 0.9);
-
   width: 0;
 
   animation:
@@ -195,14 +200,15 @@ body {
   to { border-right-color: transparent; }
 }
 
-/* Paragraph reveal with SOFT SHADOW */
+/* ABOUT ME paragraph */
 .about-text {
   opacity: 0;
   transform: translateY(14px);
   animation: paragraphReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: 2s;
+
   color: rgba(230, 238, 243, 0.88);
-  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.25); /* light dark shadow */
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes paragraphReveal {
