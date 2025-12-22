@@ -1,6 +1,4 @@
-/* =======================
-   GLOBAL RESET
-======================= */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -9,13 +7,11 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #ffffff;
+  color: #E6EEF3;
   overflow-x: hidden;
 }
 
-/* =======================
-   BACKGROUND
-======================= */
+/* ================= BACKGROUND ================= */
 .background {
   position: fixed;
   inset: 0;
@@ -28,12 +24,14 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #7DD3FC, #38BDF8);
+  background: linear-gradient(
+    120deg,
+    rgba(15, 60, 80, 0.45),
+    rgba(5, 30, 50, 0.65)
+  );
 }
 
-/* =======================
-   INTRO CONTAINER
-======================= */
+/* ================= INTRO ================= */
 .intro {
   position: fixed;
   inset: 0;
@@ -50,68 +48,49 @@ body {
   pointer-events: none;
 }
 
-/* =======================
-   PROFILE – INITIAL
-======================= */
+/* ================= PROFILE ================= */
 .profile {
   width: 180px;
   aspect-ratio: 1;
   border-radius: 50%;
   opacity: 0;
   transform: scale(0.9);
-
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-
   will-change: transform, opacity;
 }
 
-/* Profile appears */
 .profile.show {
   opacity: 1;
   transform: scale(1);
 }
 
-/* =======================
-   PROFILE – SECOND ANIMATION
-   (MOVE + SHRINK + MASK)
-======================= */
 .profile.move {
   position: fixed;
   top: 20px;
   left: 20px;
-
-  width: 90px;
-  border-radius: 35%;
-
-  transform: scale(1);
-
+  width: 82px;
+  border-radius: 28%;
+  transform: scale(0.95);
   transition:
     transform 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.15),
     width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-
   will-change: transform, width, border-radius;
 }
 
-/* =======================
-   CAPTION
-======================= */
+/* ================= WELCOME CAPTION ================= */
 .welcome {
   margin-top: 24px;
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
 
-  background: linear-gradient(
-    90deg,
-    #E6EEF3,
-    #9FD9F5,
-    #E6EEF3
-  );
+  background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 30px rgba(125, 211, 252, 0.25);
 
   opacity: 0;
   transform: translateY(18px);
@@ -128,9 +107,7 @@ body {
   transform: translateY(-10px);
 }
 
-/* =======================
-   TASKBAR (PROFESSIONAL)
-======================= */
+/* ================= TASKBAR ================= */
 .taskbar {
   position: fixed;
   bottom: -80px;
@@ -138,19 +115,15 @@ body {
   transform: translateX(-50%);
   height: 56px;
   padding: 0 36px;
-
   display: flex;
   align-items: center;
   gap: 36px;
-
   background: rgba(10, 20, 30, 0.65);
   backdrop-filter: blur(14px);
   border-radius: 16px;
-
-  font-family: "helvetica", serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
-
   transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 5;
 }
@@ -173,7 +146,7 @@ body {
   bottom: -6px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  background: linear-gradient(90deg, #7DD3FC, #38BDF8);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.35s ease;
@@ -188,9 +161,7 @@ body {
   transform-origin: left;
 }
 
-/* =======================
-   ABOUT ME SECTION
-======================= */
+/* ================= ABOUT ME ================= */
 .about {
   display: none;
   padding: 140px 40px 80px;
@@ -198,24 +169,20 @@ body {
   margin: 0 auto;
 }
 
-/* ABOUT ME heading – CSS typewriter */
 .about h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
   margin-bottom: 24px;
-
   white-space: nowrap;
   overflow: hidden;
-  border-right: 3px solid rgba(255, 255, 255, 0.8);
+  border-right: 3px solid rgba(159, 217, 245, 0.9);
   width: 0;
-
   animation:
     typingAbout 1.8s steps(8, end) forwards,
     blinkCursor 0.7s step-end infinite;
 }
 
 @keyframes typingAbout {
-  from { width: 0; }
   to { width: 8ch; }
 }
 
@@ -223,11 +190,10 @@ body {
   50% { border-color: transparent; }
 }
 
-/* About Me text */
 .about p {
   font-size: 16px;
   line-height: 1.75;
-  opacity: 0.9;
+  color: rgba(230, 238, 243, 0.88);
 }
 
 /* Certificates grid */
