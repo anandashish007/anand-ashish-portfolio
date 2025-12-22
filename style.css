@@ -49,9 +49,10 @@ body {
 }
 
 /* ================= PROFILE ================= */
+/* FIRST ANIMATION: slightly higher than center */
 .profile {
   position: fixed;
-  top: 50%;
+  top: 44%;                        /* ⬅ slightly higher than center */
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
 
@@ -72,6 +73,7 @@ body {
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* SECOND ANIMATION: zoom out + travel to top-left */
 .profile.move {
   top: 20px;
   left: 20px;
@@ -79,19 +81,18 @@ body {
   width: 82px;
   border-radius: 28%;
 
-  transform: translate(0, 0) scale(0.95);
+  transform: translate(0, 0) scale(0.92);   /* ⬅ zoom-out feeling */
 
   transition:
-    transform 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.15),
-    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.15),
+    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* ================= WELCOME (FIXED & VISIBLE) ================= */
+
+/* ================= WELCOME ================= */
 .welcome {
   position: relative;
-
-  /* push text BELOW fixed profile reliably */
-  margin-top: calc(180px + 28px);
+  margin-top: calc(180px + 28px); /* always below profile */
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
@@ -106,12 +107,9 @@ body {
 
   opacity: 0;
   transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-
-  z-index: 5; /* always below profile */
+  z-index: 5;
 }
 
 .welcome.show {
@@ -201,13 +199,9 @@ body {
     stopCursor 0.01s linear forwards 1.9s;
 }
 
-
 @keyframes typingAbout {
-  to {
-    max-width: 100%;
-  }
+  to { max-width: 100%; }
 }
-
 
 @keyframes stopCursor {
   to { border-right-color: transparent; }
