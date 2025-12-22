@@ -1,45 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
   const profile = document.getElementById("profile");
-  const caption = document.getElementById("caption");
+  const caption = document.getElementById("welcome");
   const taskbar = document.getElementById("taskbar");
   const about = document.getElementById("about");
   const typing = document.getElementById("typing");
   const intro = document.getElementById("intro");
 
-  // 1️⃣ Profile appears
-  setTimeout(() => {
-    profile.classList.add("show");
-  }, 400);
-
-  // 2️⃣ Caption appears while profile is locked
-  setTimeout(() => {
-    caption.classList.add("show");
-  }, 900);
-
-  // 3️⃣ Profile moves to second position
-  setTimeout(() => {
-    profile.classList.add("move");
-  }, 2600);
-
-  // 4️⃣ Caption disappears AFTER profile moves
-  setTimeout(() => {
-    caption.classList.add("hide");
-  }, 3000);
-  // 5 Intro exits (THIS IS THE MISSING PART)
+  // 1️⃣ Profile appears (center)
 setTimeout(() => {
-   intro.classList.add("hide");
- }, 3400);
+  profile.classList.add("show");
+}, 400);
 
-  // 6 Taskbar appears
-  setTimeout(() => {
-    taskbar.classList.add("show");
-  }, 3400);
+// 2️⃣ Caption appears and fully animates
+setTimeout(() => {
+  caption.classList.add("show");
+}, 900);
 
-  // 6️⃣ About Me appears + typing
-  setTimeout(() => {
-    about.style.display = "block";
-    typeText();
-  }, 3800);
+// 3️⃣ Profile moves ONLY AFTER caption animation completes
+// caption transition = 0.6s → wait for it
+setTimeout(() => {
+  profile.classList.add("move");
+}, 1700);
+
+// 4️⃣ Caption exits during profile move
+setTimeout(() => {
+  caption.classList.add("hide");
+}, 1850);
+
+// 5️⃣ Intro fades out
+setTimeout(() => {
+  intro.classList.add("hide");
+}, 2350);
+
+// 6️⃣ Taskbar appears
+setTimeout(() => {
+  taskbar.classList.add("show");
+}, 2550);
+
+// 7️⃣ About Me appears
+setTimeout(() => {
+  about.style.display = "block";
+  typeText();
+}, 2900);
 
   function typeText() {
     const text =
