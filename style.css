@@ -36,69 +36,69 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 
 /* INTRO CONTAINER (CENTERED) */
 .intro{
-  position:fixed;inset:0;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:18px; /* <-- ensures perfect distance */
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
   z-index:10;
-  transform:translateY(-30px); /* slightly higher intro */
-  transition:opacity .5s ease;
+  transform:translateY(-30px);
+  transition:opacity .5s ease,
+             transform .7s cubic-bezier(.22,1,.36,1);
 }
 .intro.hide{opacity:0;pointer-events:none;}
 
 /* PROFILE PIC */
 .profile{
-  position:fixed;
-  top:50%;left:50%;
-  width:180px;aspect-ratio:1;
+  position:relative;
+  width:180px;
+  aspect-ratio:1;
   opacity:0;
-
-  transform:
-    translate(-50%,-50%)
-    translateY(25px)
-    scale(.93);
-
+  transform:translateY(25px) scale(.93);
   clip-path:circle(50% at 50% 50%);
   transition:
     opacity .9s cubic-bezier(.22,1,.36,1),
     transform .9s cubic-bezier(.22,1,.36,1),
     width .9s cubic-bezier(.22,1,.36,1),
     clip-path .9s cubic-bezier(.22,1,.36,1);
-
   z-index:20;
 }
-
 .profile.show{
   opacity:1;
-  transform:
-    translate(-50%,-50%)
-    translateY(0)
-    scale(1);
+  transform:translateY(0) scale(1);
 }
 
-/* HERO MOVE — to EXACT SPOT from your image */
+/* we no longer move the image alone; keep only size change for later if needed */
 .profile.move{
   width:82px;
   clip-path:circle(45% at 50% 50%);
-  transform:
-    translate(-50%,-50%)
-    translate(calc(-50vw + 35px), calc(-50vh + 35px)); /* TOP LEFT LIKE IMAGE */
 }
 
 /* CAPTION */
 .welcome{
   font-family:"Bebas Neue";font-size:30px;
   letter-spacing:3px;
-  margin-top:8px;
+  margin-top:0;
   background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   opacity:0;
   transform:translateY(14px);
-  transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),
+             transform .6s cubic-bezier(.22,1,.36,1);
 }
 .welcome.show{opacity:1;transform:translateY(0);}
 .welcome.hide{opacity:0;transform:translateY(-12px);}
+
+/* INTRO FINAL POSITION (TOP-LEFT) */
+.intro.moveIntro{
+  align-items:flex-start;
+  justify-content:flex-start;
+  padding:20px 0 0 20px; /* tweak these to match your screenshot */
+  transform:translateY(0);
+}
 
 /* GREETING */
 .greeting{
