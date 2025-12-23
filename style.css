@@ -19,8 +19,8 @@ body {
   height: 100%;
   object-fit: cover;
 
-  /* prevent jitter */
   transform: scale(1.06);
+  transform-origin: center;
   will-change: transform, filter;
 
   filter: blur(18px) brightness(0.9);
@@ -29,7 +29,7 @@ body {
 }
 
 .background.bg-clear {
-  filter: blur(0px) brightness(1);
+  filter: blur(0) brightness(1);
 }
 
 .background.bg-about {
@@ -45,36 +45,35 @@ body {
   align-items: center;
   justify-content: center;
 
-  transform: translateY(-40px); /* profile slightly higher */
+  transform: translateY(-40px);
   z-index: 10;
+
+  transition: opacity 0.5s ease;
 }
 
 .intro.hide {
   opacity: 0;
   pointer-events: none;
 }
-profile {
-  position: fixed;
 
-  /* initial position handled by parent (.intro) */
+/* ================= PROFILE ================= */
+.profile {
   width: 180px;
   aspect-ratio: 1;
-
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
 
-  /* PERFECT CIRCLE MASK */
+  transform: translateY(20px) scale(0.95);
   clip-path: circle(50% at 50% 50%);
 
   z-index: 20;
 
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    top 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    left 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    clip-path 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+    transform 0.8s cubic-bezier(0.22,1,0.36,1),
+    top 0.8s cubic-bezier(0.22,1,0.36,1),
+    left 0.8s cubic-bezier(0.22,1,0.36,1),
+    width 0.8s cubic-bezier(0.22,1,0.36,1),
+    clip-path 0.8s cubic-bezier(0.22,1,0.36,1);
 
   will-change: transform, top, left, width, clip-path;
 }
@@ -84,43 +83,28 @@ profile {
   transform: translateY(0) scale(1);
 }
 
-/* HERO / SHARED-ELEMENT MOVE */
- 
+/* HERO / SHARED ELEMENT MOVE */
 .profile.move {
+  position: fixed;
   top: 20px;
   left: 20px;
   width: 82px;
 
-  transform: translate(0, 0);
-  .profile.move {
-  top: 20px;
-  left: 20px;
-  width: 82px;
-
-  transform: translate(0, 0);
-
-  /* soft rounded avatar (NOT square) */
+  transform: translate(0,0);
   clip-path: circle(42% at 50% 50%);
 }
 
-
 /* ================= WELCOME CAPTION ================= */
-
 .welcome {
-  margin-top: 22px; /* directly under profile */
-
+  margin-top: 22px;
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
   text-align: center;
   white-space: nowrap;
 
-  background: linear-gradient(
-    90deg,
-    #e6eef3,
-    #9fd9f5,
-    #e6eef3
-  );
+  background: linear-gradient(90deg, #e6eef3, #9fd9f5, #e6eef3);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -128,8 +112,8 @@ profile {
   transform: translateY(12px);
 
   transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+    transform 0.6s cubic-bezier(0.22,1,0.36,1);
 
   z-index: 15;
 }
@@ -144,26 +128,16 @@ profile {
   transform: translateY(-8px);
 }
 
-
-/* gradient animation */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 /* ================= GREETING ================= */
 .greeting {
   position: fixed;
   top: 22%;
   left: 50%;
-  transform: translate(-50%, 16px);
+  transform: translate(-50%,16px);
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 30px;
   letter-spacing: 2px;
-
-  /* premium translucent white */
   color: rgba(255,255,255,0.78);
 
   opacity: 0;
@@ -185,7 +159,7 @@ profile {
   opacity: 0.6;
 }
 
-/* ================= TASKBAR (REAL GLASS) ================= */
+/* ================= TASKBAR ================= */
 .taskbar {
   position: fixed;
   top: -80px;
@@ -198,17 +172,15 @@ profile {
   align-items: center;
   gap: 36px;
 
-  background: rgba(20, 40, 55, 0.55);
+  background: rgba(20,40,55,0.55);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
 
   border-radius: 16px;
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.08),
     0 14px 32px rgba(0,0,0,0.28);
 
-  font-family: "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   letter-spacing: 1px;
 
@@ -220,7 +192,6 @@ profile {
   top: 18px;
 }
 
-/* taskbar hover behavior */
 .taskbar a {
   color: rgba(230,238,243,0.78);
   cursor: pointer;
@@ -254,14 +225,12 @@ profile {
   display: block;
 }
 
-/* ABOUT heading */
 .about h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
   margin-bottom: 24px;
 }
 
-/* ABOUT text */
 .about-text {
   color: rgba(230,238,243,0.88);
   line-height: 1.75;
