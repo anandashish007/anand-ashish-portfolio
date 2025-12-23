@@ -94,13 +94,21 @@ body {
 
 /* ================= PROFILE ================= */
 .profile {
-  position: relative;          /* 🔑 participate in flex layout */
+  position: fixed; /* 🔑 NEVER CHANGES */
+
+  top: 50%;
+  left: 50%;
 
   width: 180px;
   aspect-ratio: 1;
 
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
+
+  /* intro position */
+  transform:
+    translate(-50%, -50%)
+    translateY(20px)
+    scale(0.95);
 
   clip-path: circle(50% at 50% 50%);
   transform-origin: center;
@@ -108,29 +116,31 @@ body {
   z-index: 20;
 
   transition:
-    opacity 0.8s cubic-bezier(0.22,1,0.36,1),
-    transform 0.8s cubic-bezier(0.22,1,0.36,1),
-    top 0.8s cubic-bezier(0.22,1,0.36,1),
-    left 0.8s cubic-bezier(0.22,1,0.36,1),
-    width 0.8s cubic-bezier(0.22,1,0.36,1),
-    clip-path 0.8s cubic-bezier(0.22,1,0.36,1);
+    opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+    transform 0.9s cubic-bezier(0.22,1,0.36,1),
+    width 0.9s cubic-bezier(0.22,1,0.36,1),
+    clip-path 0.9s cubic-bezier(0.22,1,0.36,1);
 
-  will-change: transform, top, left, width, clip-path;
+  will-change: transform, width, clip-path;
 }
 
 .profile.show {
   opacity: 1;
-  transform: translateY(0) scale(1);
+
+  /* final intro position */
+  transform:
+    translate(-50%, -50%)
+    translateY(0)
+    scale(1);
 }
 
-/* HERO / SHARED ELEMENT MOVE */
+/* HERO MOVE — PURE TRANSFORM (NO LAYOUT SHIFT) */
 .profile.move {
-  position: fixed;             /* 🔑 becomes fixed ONLY here */
-  top: 20px;
-  left: 20px;
-
   width: 82px;
-  transform: translate(0,0);
+
+  transform:
+    translate(-50%, -50%)
+    translate(-50vw + 20px, -50vh + 20px);
 
   clip-path: circle(45% at 50% 50%);
 }
