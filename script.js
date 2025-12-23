@@ -1,44 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const profile = document.getElementById("profile"),
-        caption = document.getElementById("caption"),
-        loader = document.getElementById("loader"),
-        taskbar = document.getElementById("taskbar"),
-        greeting = document.getElementById("greeting"),
-        bg = document.querySelector(".background"),
-        about = document.getElementById("about"),
-        aboutBtn = document.getElementById("aboutBtn"),
-        homeBtn = document.getElementById("homeBtn");
+document.addEventListener('DOMContentLoaded', () => {
+    const profile = document.getElementById('profile-pic');
+    const caption = document.getElementById('welcome-caption');
+    const header = document.getElementById('header-container');
 
-  // Greeting logic
-  const h = new Date().getHours();
-  greeting.textContent = h < 12 ? "GOOD MORNING" : h < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
-
-  // Startup sequence
-  setTimeout(() => {
-    loader.classList.add("hide");
-    setTimeout(() => profile.classList.add("show"), 400);
-    setTimeout(() => caption.classList.add("show"), 900);
+    // Run the Hero Animation and Text Scale on load
     setTimeout(() => {
-      profile.classList.add("move");
-      caption.classList.add("freedom");
-    }, 2400);
-    setTimeout(() => {
-      bg.classList.add("bg-clear");
-      greeting.classList.add("show");
-      taskbar.classList.add("show");
-    }, 3000);
-  }, 800);
-
-  // About Toggle with deep blur
-  aboutBtn.onclick = () => {
-    about.classList.add("show");
-    bg.classList.add("bg-about");
-    greeting.style.opacity = "0"; // Hide greeting to focus on About
-  };
-
-  homeBtn.onclick = () => {
-    about.classList.remove("show");
-    bg.classList.remove("bg-about");
-    greeting.style.opacity = "1";
-  };
+        profile.classList.add('hero-active');
+        caption.classList.add('animate');
+        header.style.opacity = '1';
+    }, 400);
 });
+
+function openPage(section) {
+    const mainContent = document.getElementById('main-content');
+    const overlay = document.getElementById('page-overlay');
+    const dataContainer = document.getElementById('page-data');
+
+    // Apply 42% blur to background AND profile picture
+    mainContent.classList.add('is-blurred');
+
+    // Content for each section
+    dataContainer.innerHTML = `<h1>${section}</h1><p>This is your ${section} content.</p>`;
+    
+    overlay.style.display = 'flex';
+}
+
+function closePage() {
+    const mainContent = document.getElementById('main-content');
+    const overlay = document.getElementById('page-overlay');
+
+    // Remove blur and hide window
+    mainContent.classList.remove('is-blurred');
+    overlay.style.display = 'none';
+}
+
