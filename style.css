@@ -34,7 +34,7 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .loader.hide{opacity:0;pointer-events:none;transition:.4s;}
 
-/* INTRO: fullscreen, only controls profile block */
+/* INTRO — fullscreen, single slide */
 .intro{
   position:fixed;
   inset:0;
@@ -43,21 +43,23 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   justify-content:center;
   z-index:10;
   transform:translateY(-30px);
-  transition:opacity .5s ease,
-             transform .7s cubic-bezier(.22,1,.36,1);
+  transition:
+    opacity .5s ease,
+    transform .7s cubic-bezier(.22,1,.36,1);
 }
 .intro.hide{opacity:0;pointer-events:none;}
 
-/* PROFILE WRAPPER */
+/* INNER COLUMN: PROFILE + CAPTION */
 .intro-inner{
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:14px;
-  transition:transform .7s cubic-bezier(.22,1,.36,1),
-             padding .7s cubic-bezier(.22,1,.36,1),
-             align-items .7s cubic-bezier(.22,1,.36,1),
-             justify-content .7s cubic-bezier(.22,1,.36,1);
+  transition:
+    transform .7s cubic-bezier(.22,1,.36,1),
+    padding .7s cubic-bezier(.22,1,.36,1),
+    align-items .7s cubic-bezier(.22,1,.36,1),
+    justify-content .7s cubic-bezier(.22,1,.36,1);
 }
 
 /* PROFILE PIC */
@@ -83,58 +85,54 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   clip-path:circle(56% at 50% 50%);
 }
 
-/* CAPTION – fixed in the exact center, independent */
+/* CAPTION — under picture, kinetic typography */
 .welcome{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0.9); /* center + slightly smaller */
   font-family:"Bebas Neue";
-  font-size:34px;
+  font-size:32px;
   letter-spacing:3px;
   background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
   display:block;
   text-align:center;
   white-space:nowrap;
 
   opacity:0;
+  transform:translateY(14px) scale(0.9);
   transition:
     opacity .6s cubic-bezier(.22,1,.36,1),
     transform .7s cubic-bezier(.22,1,.36,1);
 }
-
-/* kinetic intro: fade + scale up */
 .welcome.show{
   opacity:1;
-  transform:translate(-50%,-50%) scale(1.15);
+  transform:translateY(0) scale(1.15);
 }
 
-/* subtle continuous pulse (optional) */
+/* small looping pulse (transform only to avoid stutter) */
 @keyframes captionPulse{
-  0%   { transform:translate(-50%,-50%) scale(1.12); }
-  50%  { transform:translate(-50%,-50%) scale(1.18); }
-  100% { transform:translate(-50%,-50%) scale(1.12); }
+  0%   { transform:translateY(0) scale(1.12); }
+  50%  { transform:translateY(0) scale(1.18); }
+  100% { transform:translateY(0) scale(1.12); }
 }
 .welcome.pulse{
   animation:captionPulse 2.4s ease-in-out infinite;
 }
 
-/* if ever hidden later */
+/* if you ever want to hide it later */
 .welcome.hide{
   opacity:0;
-  transform:translate(-50%,-50%) scale(1.1);
+  transform:translateY(-8px) scale(1.1);
 }
 
-/* HERO POSITION: only moves profile block */
+/* HERO POSITION: move whole intro block to top-left */
 .intro.moveIntro{
   align-items:flex-start;
   justify-content:flex-start;
 }
 .intro.moveIntro .intro-inner{
   align-items:flex-start;
-  padding:20px 0 0 20px;
+  padding:20px 0 0 20px;   /* adjust to match your screenshot */
   transform:translateY(0);
 }
 
