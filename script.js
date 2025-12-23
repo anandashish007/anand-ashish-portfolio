@@ -1,84 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const profile   = document.getElementById("profile");
-  const caption   = document.getElementById("caption");
-  const intro     = document.getElementById("intro");
-  const taskbar   = document.getElementById("taskbar");
-  const about     = document.getElementById("about");
-  const bgWrap    = document.querySelector(".background-wrapper");
-  const greeting  = document.getElementById("greeting");
-  const aboutBtn  = document.getElementById("aboutBtn");
-  const homeBtn   = document.getElementById("homeBtn");
+  const profile = document.getElementById("profile");
+  const caption = document.getElementById("caption");
+  const loader = document.getElementById("loader");
+  const taskbar = document.getElementById("taskbar");
+  const greeting = document.getElementById("greeting");
+  const bg = document.querySelector(".background");
+  const about = document.getElementById("about");
+  const aboutBtn = document.getElementById("aboutBtn");
+  const homeBtn = document.getElementById("homeBtn");
 
-  let aboutOpen = false;
+  /* GREETING */
+  const h = new Date().getHours();
+  greeting.textContent =
+    h < 12 ? "GOOD MORNING" :
+    h < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
 
-  /* ================= GREETING (INDIAN TIME) ================= */
-  const hour = new Date().getHours();
-  let greetText = "GOOD EVENING";
-
-  if (hour >= 5 && hour < 12) greetText = "GOOD MORNING";
-  else if (hour >= 12 && hour < 17) greetText = "GOOD AFTERNOON";
-
-  greeting.textContent = greetText;
-
-  /* ================= INITIAL STATE ================= */
-  bgWrap.classList.add("bg-intro");
-
-  /* ================= INTRO SEQUENCE ================= */
-
-  // 1️⃣ Profile appears (slide-up + fade)
+  /* START AFTER LOADER */
   setTimeout(() => {
-    profile.classList.add("show");
-  }, 300);
+    loader.classList.add("hide");
 
-  // 2️⃣ Caption appears (0.1s delay)
-  setTimeout(() => {
-    caption.classList.add("show");
-  }, 400);
+    setTimeout(() => profile.classList.add("show"), 300);
+    setTimeout(() => caption.classList.add("show"), 400);
+    setTimeout(() => {
+      profile.classList.add("move");
+      caption.classList.add("hide");
+    }, 2400);
 
-  // 3️⃣ Hero transition (profile moves, caption exits)
-  setTimeout(() => {
-    profile.classList.add("move");
-    caption.classList.add("hide");
-  }, 2300);
+    setTimeout(() => {
+      bg.classList.add("bg-clear");
+      greeting.classList.add("show");
+    }, 2700);
 
-  // 4️⃣ Background clears + greeting appears
-  setTimeout(() => {
-    bgWrap.classList.remove("bg-intro");
-    bgWrap.classList.add("bg-clear");
-    greeting.classList.add("show");
-  }, 2600);
+    setTimeout(() => taskbar.classList.add("show"), 3200);
 
-  // 5️⃣ Intro fades + taskbar slides DOWN from top
-  setTimeout(() => {
-    intro.classList.add("hide");
-    taskbar.classList.add("show");
-  }, 3000);
+  }, 1000);
 
-  /* ================= ABOUT TOGGLE ================= */
-  aboutBtn.addEventListener("click", () => {
-    aboutOpen = !aboutOpen;
+  /* ABOUT TOGGLE */
+  aboutBtn.onclick = () => {
+    about.classList.toggle("show");
+    bg.classList.toggle("bg-about");
+  };
 
-    if (aboutOpen) {
-      about.style.display = "block";
-      bgWrap.classList.remove("bg-clear");
-      bgWrap.classList.add("bg-about");
-    } else {
-      about.style.display = "none";
-      bgWrap.classList.remove("bg-about");
-      bgWrap.classList.add("bg-clear");
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  /* ================= HOME BUTTON ================= */
-  homeBtn.addEventListener("click", () => {
-    aboutOpen = false;
-    about.style.display = "none";
-
-    bgWrap.classList.remove("bg-about");
-    bgWrap.classList.add("bg-clear");
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  homeBtn.onclick = () => {
+    about.classList.remove("show");
+    bg.classList.remove("bg-about");
+  };
 });
