@@ -11,24 +11,26 @@ body {
   overflow-x: hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* ================= BACKGROUND VIDEO ================= */
 .background {
   position: fixed;
   inset: 0;
-  background: url("bg.jpg") center / cover no-repeat;
-  filter: blur(22px) brightness(0.85);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: blur(15px) brightness(0.9);
   z-index: -2;
+
+  transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(15, 60, 80, 0.45),
-    rgba(5, 30, 50, 0.65)
-  );
+.background.bg-clear {
+  filter: blur(0px) brightness(1);
+}
+
+.background.bg-about {
+  filter: blur(20px) brightness(0.85);
 }
 
 /* ================= INTRO ================= */
@@ -48,13 +50,14 @@ body {
   pointer-events: none;
 }
 
-/* ================= PROFILE ================= */
-/* FIRST ANIMATION: slightly higher than center */
+/* ================= PROFILE (HERO ANIMATION) ================= */
 .profile {
   position: fixed;
-  top: 44%;                        /* ⬅ slightly higher than center */
+
+  /* initial hero position (slightly top-center) */
+  top: 44%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
+  transform: translate(-50%, 20px);
 
   width: 180px;
   aspect-ratio: 1;
@@ -64,35 +67,35 @@ body {
   z-index: 20;
 
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    left 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform, top, left, width;
 }
 
+/* profile enters */
 .profile.show {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -10px);
 }
 
-/* SECOND ANIMATION: zoom out + travel to top-left */
+/* hero shared-element move (NO ZOOM) */
 .profile.move {
   top: 20px;
   left: 20px;
-
-  width: 82px;
+  width: 84px;
   border-radius: 28%;
-
-  transform: translate(0, 0) scale(0.92);   /* ⬅ zoom-out feeling */
-
-  transition:
-    transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.15),
-    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate(0, 0);
 }
 
 /* ================= WELCOME ================= */
 .welcome {
   position: relative;
-  margin-top: calc(180px + 28px); /* always below profile */
+  margin-top: calc(180px + 28px);
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
@@ -103,11 +106,11 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  text-shadow: 0 6px 30px rgba(125, 211, 252, 0.25);
-
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 
   z-index: 5;
 }
@@ -119,58 +122,63 @@ body {
 
 .welcome.hide {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-12px);
 }
 
-/* ================= TASKBAR ================= */
+/* ================= GREETING ================= */
+.greeting {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%, 16px);
+
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+
+  opacity: 0;
+  z-index: 8;
+
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.greeting.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ================= TASKBAR (TOP) ================= */
 .taskbar {
   position: fixed;
-  bottom: -80px;
+  top: -80px;
   left: 50%;
   transform: translateX(-50%);
   height: 56px;
   padding: 0 36px;
+
   display: flex;
   align-items: center;
   gap: 36px;
 
-  background: rgba(10, 20, 30, 0.65);
+  background: rgba(20, 40, 55, 0.75);
   backdrop-filter: blur(14px);
   border-radius: 16px;
 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
 
-  transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 15;
 }
 
 .taskbar.show {
-  bottom: 24px;
-}
-
-.taskbar a {
-  color: rgba(230, 238, 243, 0.75);
-  text-decoration: none;
-  position: relative;
-}
-
-.taskbar a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #7DD3FC, #38BDF8);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.35s ease;
-}
-
-.taskbar a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  top: 18px;
 }
 
 /* ================= ABOUT ME ================= */
@@ -181,7 +189,6 @@ body {
   margin: 0 auto;
 }
 
-/* ABOUT ME heading typing */
 .about h2 {
   font-family: "Bebas Neue", sans-serif;
   font-size: 42px;
@@ -207,7 +214,6 @@ body {
   to { border-right-color: transparent; }
 }
 
-/* ABOUT ME paragraph */
 .about-text {
   opacity: 0;
   transform: translateY(14px);
@@ -215,7 +221,7 @@ body {
   animation-delay: 2s;
 
   color: rgba(230, 238, 243, 0.88);
-  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
 @keyframes paragraphReveal {
@@ -223,68 +229,4 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* ===== BACKGROUND STATES ===== */
-.background {
-  transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.bg-intro {
-  filter: blur(15px) brightness(0.9);
-}
-
-.bg-clear {
-  filter: blur(0px) brightness(1);
-}
-
-.bg-about {
-  filter: blur(20px) brightness(0.85);
-}
-
-/* ================= GREETING ================= */
-.greeting {
-  position: fixed;
-  top: 22%;
-  left: 50%;
-  transform: translate(-50%, 18px);
-
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 32px;
-  letter-spacing: 2px;
-
-  color: rgba(255, 255, 255, 0.75);
-  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-
-  opacity: 0;
-  z-index: 8;
-
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.greeting.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-/* ===== TASKBAR (TOP) ===== */
-.taskbar {
-  top: -80px;
-  bottom: auto;
-  transition: top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.taskbar.show {
-  top: 20px;
-}
-
-/* ===== PROFILE HERO MOVE (NO ZOOM) ===== */
-.profile.move {
-  top: 20px;
-  left: 20px;
-  width: 82px;
-  border-radius: 28%;
-  transform: translate(0,0) scale(1);
 }
