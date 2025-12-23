@@ -92,19 +92,16 @@ body {
   pointer-events: none;
 }
 
-* ================= PROFILE ================= */
+/* ================= PROFILE ================= */
 .profile {
-  position: fixed; /* 🔑 FIXED from start = no jumps */
+  position: relative;          /* 🔑 participate in flex layout */
 
   width: 180px;
   aspect-ratio: 1;
 
   opacity: 0;
-  transform: translate(-50%, 20px) scale(0.95);
-  top: 50%;
-  left: 50%;
+  transform: translateY(20px) scale(0.95);
 
-  /* perfect circular mask */
   clip-path: circle(50% at 50% 50%);
   transform-origin: center;
 
@@ -120,18 +117,21 @@ body {
 
   will-change: transform, top, left, width, clip-path;
 }
+
 .profile.show {
   opacity: 1;
-  transform: translate(-50%, 0) scale(1);
+  transform: translateY(0) scale(1);
 }
 
 /* HERO / SHARED ELEMENT MOVE */
 .profile.move {
+  position: fixed;             /* 🔑 becomes fixed ONLY here */
   top: 20px;
   left: 20px;
-  width: 82px;
 
+  width: 82px;
   transform: translate(0,0);
+
   clip-path: circle(45% at 50% 50%);
 }
 
