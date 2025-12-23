@@ -8,61 +8,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const about    = document.getElementById("about");
   const aboutBtn = document.getElementById("aboutBtn");
   const homeBtn  = document.getElementById("homeBtn");
-  const intro    = document.getElementById("intro");
 
-  /* GREETING LOGIC */
+  // Greeting logic
   const h = new Date().getHours();
-  greeting.textContent =
-    h < 12 ? "GOOD MORNING" :
-    h < 17 ? "GOOD AFTERNOON" :
-    "GOOD EVENING";
+  greeting.textContent = h < 12 ? "GOOD MORNING" : h < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
 
-  // Animation Sequence
+  // Main Animation Sequence
   setTimeout(() => {
-    // Hide Loader
     loader.classList.add("hide");
 
-    // 1. Show Profile
-    setTimeout(() => profile.classList.add("show"), 300);
+    setTimeout(() => profile.classList.add("show"), 400);
+    setTimeout(() => caption.classList.add("show"), 900);
 
-    // 2. Show Caption (Name)
-    setTimeout(() => caption.classList.add("show"), 800);
-
-    // 3. Move to Corner & Hide Caption
+    // Profile flies to corner, text snaps up in 0.1s
     setTimeout(() => {
-      caption.classList.remove("show");
-      caption.classList.add("hide");
-      
-      intro.classList.add("moveIntro");
       profile.classList.add("move");
-    }, 2200);
+      caption.classList.add("freedom");
+    }, 2400);
 
-    // 4. Reveal Background and Taskbar
+    // Show final UI
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
       taskbar.classList.add("show");
-    }, 2800);
-
+    }, 3000);
   }, 800);
 
-  /* INTERACTION LOGIC */
+  // About Toggle
   let opened = false;
-
   aboutBtn.onclick = (e) => {
     e.preventDefault();
     opened = !opened;
     about.classList.toggle("show", opened);
     bg.classList.toggle("bg-about", opened);
-    greeting.classList.toggle("blur", opened);
   };
-
+  
   homeBtn.onclick = (e) => {
     e.preventDefault();
     opened = false;
     about.classList.remove("show");
     bg.classList.remove("bg-about");
-    greeting.classList.remove("blur");
   };
 });
 
