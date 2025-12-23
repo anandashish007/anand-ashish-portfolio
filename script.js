@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     h < 17 ? "GOOD AFTERNOON" :
     "GOOD EVENING";
 
-  const profileInMs = 900;  // matches CSS for .profile
-  const captionInMs = 200;  // matches CSS for .welcome
+  const profileInMs = 900;  // same as CSS transition for .profile
 
   setTimeout(() => {
 
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2) caption zoom-in
     setTimeout(() => caption.classList.add("show"), 200 + 250);
 
-    // 3) hero move for profile once cubic-bezier done
+    // 3) hero move for profile once its cubic-bezier finishes
     setTimeout(() => {
       intro.classList.add("moveIntro");
       profile.classList.add("move");
