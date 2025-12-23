@@ -23,30 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loader.classList.add("hide");
 
-    // 1) profile and caption appear
+    // 1) profile + caption come in
     setTimeout(() => profile.classList.add("show"), 200);
     setTimeout(() => {
       caption.classList.add("show");
-      // start subtle pulse after initial grow
+      // start subtle pulse after initial grow finishes
       setTimeout(() => caption.classList.add("pulse"), 900);
     }, 350);
 
-    // 2) after intro anim finishes, move profile to hero
-    const introDuration = 900; // matches profile transition
+    // 2) when intro anim (0.9s) is done, move hero
+    const introDuration = 900;
     setTimeout(() => {
-      intro.classList.add("moveIntro"); // only profile container moves
-      profile.classList.add("move");
+      intro.classList.add("moveIntro");  // move entire block
+      profile.classList.add("move");     // shrink image
+      // caption stays under it because it is in the same intro-inner
     }, 350 + introDuration + 150);
 
-    // 3) BG, greeting, taskbar
+    // 3) background clear + greeting + taskbar
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
     }, 350 + introDuration + 150 + 300);
 
-    setTimeout(() => taskbar.classList.add("show"),
-      350 + introDuration + 150 + 600
-    );
+    setTimeout(() => {
+      taskbar.classList.add("show");
+    }, 350 + introDuration + 150 + 600);
 
   }, 800);
 
