@@ -15,26 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     loader.classList.add("hide");
 
-    // Start of flow: Profile begins showing
-    setTimeout(() => profile.classList.add("show"), 300);
+    // Sequence Start
+    setTimeout(() => profile.classList.add("show"), 400);
+    
+    // Caption appears after profile is solid
+    setTimeout(() => caption.classList.add("show"), 800);
 
-    // Text begins showing shortly after profile starts
-    setTimeout(() => caption.classList.add("show"), 700);
-
-    // Separation happens exactly as text finishes its 0.5s fade (700+500=1200)
+    // Hero Move & Caption Snap (Slower and stutter-free)
     setTimeout(() => {
       profile.classList.add("move");
       caption.classList.add("freedom");
-    }, 1800); 
+    }, 2200); 
 
-    // Background and Nav appear as profile is mid-flight
+    // Final Background and Taskbar
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
       taskbar.classList.add("show");
-    }, 2300);
-  }, 600);
+    }, 3000);
+  }, 800);
 
+  // Interaction logic
   aboutBtn.onclick = (e) => {
     e.preventDefault();
     about.classList.add("show");
@@ -49,4 +50,3 @@ document.addEventListener("DOMContentLoaded", () => {
     greeting.style.opacity = "1";
   };
 });
-
