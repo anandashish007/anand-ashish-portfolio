@@ -1,57 +1,90 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const profile = document.getElementById("profile");
-  const caption = document.getElementById("caption");
-  const intro = document.getElementById("intro");
-  const taskbar = document.getElementById("taskbar");
-  const about = document.getElementById("about");
-  const bg = document.querySelector(".background");
+  const profile  = document.getElementById("profile");
+  const caption  = document.getElementById("caption");
+  const intro    = document.getElementById("intro");
+  const taskbar  = document.getElementById("taskbar");
+  const about    = document.getElementById("about");
+  const bg       = document.querySelector(".background");
   const greeting = document.getElementById("greeting");
+  const aboutBtn = document.getElementById("aboutBtn");
+  const homeBtn  = document.getElementById("homeBtn");
 
-  // ---- Greeting (Indian Time) ----
+  /* ========== GREETING (INDIAN TIME) ========== */
   const hour = new Date().getHours();
-  let greetText = "Good Evening";
+  let greetText = "GOOD EVENING";
 
-  if (hour >= 5 && hour < 12) greetText = "Good Morning";
-  else if (hour >= 12 && hour < 17) greetText = "Good Afternoon";
+  if (hour >= 5 && hour < 12) greetText = "GOOD MORNING";
+  else if (hour >= 12 && hour < 17) greetText = "GOOD AFTERNOON";
 
-  greeting.textContent = greetText;
+  if (greeting) greeting.textContent = greetText;
 
-  // ---- Initial background state ----
-  bg.classList.add("bg-intro");
+  /* ========== INITIAL BACKGROUND STATE ========== */
+  if (bg) {
+    bg.classList.remove("bg-clear", "bg-about");
+    bg.classList.add("bg-intro");
+  }
 
-  // 1️⃣ Profile appears (slightly top-center)
+  /* ========== INTRO SEQUENCE ========== */
+
+  // 1️⃣ Profile appears (slide up + fade)
   setTimeout(() => {
-    profile.classList.add("show");
+    profile?.classList.add("show");
   }, 300);
 
-  // 2️⃣ Caption (0.1s delay)
+  // 2️⃣ Caption appears (0.1s delay)
   setTimeout(() => {
-    caption.classList.add("show");
+    caption?.classList.add("show");
   }, 400);
 
-  // 3️⃣ Profile hero move to top-left
+  // 3️⃣ Profile hero move + caption exit
   setTimeout(() => {
-    profile.classList.add("move");
-    caption.classList.add("hide");
+    profile?.classList.add("move");
+    caption?.classList.add("hide");
   }, 2300);
 
   // 4️⃣ Background clears + greeting appears
   setTimeout(() => {
-    bg.classList.remove("bg-intro");
-    bg.classList.add("bg-clear");
-    greeting.classList.add("show");
+    if (bg) {
+      bg.classList.remove("bg-intro");
+      bg.classList.add("bg-clear");
+    }
+    greeting?.classList.add("show");
   }, 2600);
 
-  // 5️⃣ Intro gone, taskbar slides down
+  // 5️⃣ Intro fades, taskbar slides down from top
   setTimeout(() => {
-    intro.classList.add("hide");
-    taskbar.classList.add("show");
+    intro?.classList.add("hide");
+    taskbar?.classList.add("show");
   }, 3000);
 
-  // ---- ABOUT ME toggle ----
-  document.getElementById("aboutBtn").addEventListener("click", () => {
-    about.style.display = "block";
-    bg.classList.remove("bg-clear");
-    bg.classList.add("bg-about");
-  });
+  /* ========== ABOUT BUTTON ========== */
+  if (aboutBtn) {
+    aboutBtn.addEventListener("click", () => {
+      about.style.display = "block";
+
+      if (bg) {
+        bg.classList.remove("bg-clear");
+        bg.classList.add("bg-about");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ========== HOME BUTTON ========== */
+  if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+      // Hide About section
+      about.style.display = "none";
+
+      // Restore normal background
+      if (bg) {
+        bg.classList.remove("bg-about");
+        bg.classList.add("bg-clear");
+      }
+
+      // Smooth scroll back to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
