@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const profile  = document.getElementById("profile");
-  const caption  = document.getElementById("caption");
+  const profile  = document.getElementById("profile"); // picture only
+  const caption  = document.getElementById("caption"); // text only
   const loader   = document.getElementById("loader");
   const taskbar  = document.getElementById("taskbar");
   const greeting = document.getElementById("greeting");
@@ -18,40 +18,39 @@ document.addEventListener("DOMContentLoaded", () => {
     h < 17 ? "GOOD AFTERNOON" :
     "GOOD EVENING";
 
-  /* INTRO SEQUENCE */
+  const profileInMs = 900;  // same as CSS for .profile
+  const captionInMs = 200;  // same as CSS for .welcome
+
   setTimeout(() => {
 
     loader.classList.add("hide");
 
-    // 1) profile + caption come in
+    // 1) profile fade-in
     setTimeout(() => profile.classList.add("show"), 200);
-    setTimeout(() => {
-      caption.classList.add("show");
-      // start subtle pulse after initial grow finishes
-      setTimeout(() => caption.classList.add("pulse"), 900);
-    }, 350);
 
-    // 2) when intro anim (0.9s) is done, move hero
-    const introDuration = 900;
-    setTimeout(() => {
-      intro.classList.add("moveIntro");  // move entire block
-      profile.classList.add("move");     // shrink image
-      // caption stays under it because it is in the same intro-inner
-    }, 350 + introDuration + 150);
+    // 2) caption zoom-in (separate, only 0.2 s)
+    setTimeout(() => caption.classList.add("show"), 200 + 250);
 
-    // 3) background clear + greeting + taskbar
+    // 3) hero animation for profile: starts as soon as its cubic-bezier ends
+    setTimeout(() => {
+      intro.classList.add("moveIntro"); // move container
+      profile.classList.add("move");    // shrink circle
+      // caption is untouched here -> no hero animation on text
+    }, 200 + profileInMs);
+
+    // 4) background, greeting, taskbar
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
-    }, 350 + introDuration + 150 + 300);
+    }, 200 + profileInMs + 300);
 
-    setTimeout(() => {
-      taskbar.classList.add("show");
-    }, 350 + introDuration + 150 + 600);
+    setTimeout(() => taskbar.classList.add("show"),
+      200 + profileInMs + 600
+    );
 
   }, 800);
 
-  /* ABOUT OPEN/CLOSE */
+  /* ABOUT TOGGLE */
   let opened = false;
 
   aboutBtn.onclick = () => {
