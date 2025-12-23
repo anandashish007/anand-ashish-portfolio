@@ -45,7 +45,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  z-index: 30;
+  z-index: 40;
+  background: transparent;
 }
 
 .loader span {
@@ -56,7 +57,6 @@ body {
   animation: loaderPulse 1s infinite ease-in-out;
 }
 
-.loader span:nth-child(1) { animation-delay: 0s; }
 .loader span:nth-child(2) { animation-delay: 0.15s; }
 .loader span:nth-child(3) { animation-delay: 0.3s; }
 
@@ -72,7 +72,7 @@ body {
   transition: opacity 0.4s ease;
 }
 
-/* ================= INTRO LAYER ================= */
+/* ================= INTRO ================= */
 .intro {
   position: fixed;
   inset: 0;
@@ -80,11 +80,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 22px;
-  transform: translateY(-20px);
 
+  transform: translateY(-20px);
   z-index: 10;
+
   transition: opacity 0.5s ease;
 }
 
@@ -95,8 +95,7 @@ body {
 
 /* ================= PROFILE ================= */
 .profile {
-  position: fixed; /* 🔑 NEVER CHANGES */
-
+  position: fixed;
   top: 50%;
   left: 50%;
 
@@ -105,7 +104,6 @@ body {
 
   opacity: 0;
 
-  /* intro position */
   transform:
     translate(-50%, -50%)
     translateY(20px)
@@ -127,39 +125,41 @@ body {
 
 .profile.show {
   opacity: 1;
-
-  /* final intro position */
   transform:
     translate(-50%, -50%)
     translateY(0)
     scale(1);
 }
 
-/* HERO MOVE — PURE TRANSFORM (NO LAYOUT SHIFT) */
+/* HERO MOVE — continuous, no pause */
 .profile.move {
   width: 82px;
-
   transform:
     translate(-50%, -50%)
     translate(-50vw + 20px, -50vh + 20px);
 
   clip-path: circle(45% at 50% 50%);
 }
+/* ================= WELCOME ================= */
+.welcome {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 34px;
+  letter-spacing: 3px;
+  text-align: center;
+  white-space: nowrap;
 
-/* ================= WELCOME CAPTION ================= */
-.intro {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(90deg, #e6eef3, #9fd9f5, #e6eef3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-  gap: 22px;              /* 🔑 THIS fixes overlap */
-  transform: translateY(-20px);
+  opacity: 0;
+  transform: translateY(12px);
 
-  z-index: 10;
-  transition: opacity 0.5s ease;
+  transition:
+    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+    transform 0.6s cubic-bezier(0.22,1,0.36,1);
+
+  z-index: 15;
 }
 
 .welcome.show {
@@ -169,7 +169,7 @@ body {
 
 .welcome.hide {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-10px);
 }
 
 /* ================= GREETING ================= */
@@ -217,7 +217,7 @@ body {
   gap: 36px;
 
   background: rgba(20,40,55,0.55);
-  backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
 
   border-radius: 16px;
