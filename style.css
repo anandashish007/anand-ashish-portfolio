@@ -2,18 +2,16 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden; background: #0b1116; }
 
-/* BACKGROUND - Optimized for 45% Blur */
+/* BACKGROUND */
 .background {
   position: fixed; inset: 0; width: 100%; height: 100%;
   object-fit: cover;
-  transform: scale(1.06) translate3d(0,0,0);
+  transform: scale(1.06);
   filter: blur(18px) brightness(0.9);
   transition: filter .9s cubic-bezier(.22,1,.36,1);
   z-index: -2;
-  will-change: filter;
 }
 .background.bg-clear { filter: blur(0) brightness(1); }
-/* Your requested 45% deep blur */
 .background.bg-about { filter: blur(45px) brightness(.7); }
 
 /* LOADER */
@@ -35,7 +33,7 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 }
 .loader.hide { opacity: 0; pointer-events: none; transition: .4s; }
 
-/* INTRO CONTAINER - Independent movement */
+/* INTRO CONTAINER */
 .intro {
   position: fixed;
   inset: 0;
@@ -43,40 +41,47 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  transition: opacity .5s ease;
 }
+.intro.hide { opacity: 0; pointer-events: none; }
+
 .intro-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   justify-content: center;
+  gap: 18px;
+  transition: transform 0.9s cubic-bezier(.22,1,.36,1);
 }
 
-/* PROFILE PICTURE - Smooth Hero Animation */
+/* PROFILE PICTURE */
 .profile {
   width: 180px;
   aspect-ratio: 1;
   opacity: 0;
-  transform: translate3d(0, 18px, 0) scale(0.94);
+  transform: translateY(18px) scale(0.94);
   clip-path: circle(50% at 50% 50%);
   transition: 
     opacity 0.9s cubic-bezier(.22,1,.36,1), 
-    transform 0.9s cubic-bezier(.22,1,.36,1);
-  will-change: transform, opacity;
-  z-index: 20;
+    transform 0.9s cubic-bezier(.22,1,.36,1),
+    clip-path 0.9s cubic-bezier(.22,1,.36,1);
 }
 .profile.show {
   opacity: 1;
-  transform: translate3d(0,0,0) scale(1);
-}
-/* Moves to corner independent of text */
-.profile.move {
-  position: absolute;
-  transform: translate3d(-38vw, -42vh, 0) scale(0.45);
+  transform: translateY(0) scale(1);
 }
 
-/* WELCOME TEXT - 0.1s Snappy Freedom */
+/* Move ONLY the picture to the corner - Independent from text */
+.profile.move {
+  position: absolute;
+  transform: translate(-38vw, -42vh) scale(0.45);
+  transform-origin: center;
+}
+
+/* CAPTION / WELCOME TEXT */
 .welcome {
   font-family: "Bebas Neue", sans-serif;
   font-size: 32px;
@@ -84,31 +89,36 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
   background: linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 20px;
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
+  transform: translateY(14px) scale(0.7);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.welcome.show { opacity: 1; transform: translate3d(0,0,0); }
+.welcome.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 0.1s Snappy Freedom Snap */
 .welcome.freedom {
-  transition: transform 0.1s ease-out; /* 0.1s snap as requested */
-  transform: translate3d(0, -50px, 0);
+  transition: transform 0.1s ease-out; 
+  transform: translateY(-60px); 
 }
 
 /* GREETING */
 .greeting {
   position: fixed; top: 22%; left: 50%;
-  transform: translate3d(-50%, 16px, 0);
+  transform: translate(-50%, 16px);
   font-family: "Bebas Neue", sans-serif; font-size: 30px;
   opacity: 0; z-index: 5;
   transition: .6s cubic-bezier(.22,1,.36,1);
 }
-.greeting.show { opacity: 1; transform: translate3d(-50%, 0, 0); }
+.greeting.show { opacity: 1; transform: translate(-50%, 0); }
+.greeting.blur { filter: blur(8px); opacity: .6; }
 
 /* TASKBAR */
 .taskbar {
   position: fixed; bottom: -80px; left: 50%;
-  transform: translate3d(-50%, 0, 0);
+  transform: translateX(-50%);
   height: 56px; padding: 0 36px;
   display: flex; gap: 36px; align-items: center;
   background: rgba(20,40,55,.55);
@@ -120,32 +130,33 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 }
 .taskbar.show { bottom: 20px; }
 .taskbar a { color: #e6eef3c7; text-decoration: none; transition: .25s; cursor: pointer; }
+.taskbar:hover a { filter: blur(2px); opacity: .55; }
+.taskbar a:hover { filter: none; opacity: 1; transform: translateY(-4px) scale(1.08); }
 
-/* ABOUT SECTION - Typewriter & Cubic Bezier Fade */
+/* ABOUT SECTION */
 .about {
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0; pointer-events: none;
-  width: 80%; max-width: 800px; z-index: 30;
+  max-width: 900px; width: 85%; padding: 40px;
+  z-index: 30;
 }
 .about.show { opacity: 1; pointer-events: auto; }
 
 .about h2 {
   font-family: "Bebas Neue"; font-size: 48px;
   overflow: hidden; white-space: nowrap;
-  border-right: 3px solid #9fd9f5;
-  width: 0; /* Starting state for typewriter */
+  border-right: 3px solid #9fd9f5; width: 0;
 }
-.about.show h2 {
-  animation: typing 1.5s steps(30, end) forwards;
-}
+.about.show h2 { animation: typing 1.5s steps(30, end) forwards; }
 
 .about-text {
-  opacity: 0; transform: translate3d(0, 20px, 0);
+  opacity: 0; transform: translateY(20px);
 }
 .about.show .about-text {
-  opacity: 1; transform: translate3d(0, 0, 0);
-  transition: all 1s cubic-bezier(.22,1,.36,1) 1.2s; /* Delayed until typewriter ends */
+  opacity: 1; transform: translateY(0);
+  transition: all 1s cubic-bezier(.22,1,.36,1) 1.2s;
 }
 
 @keyframes typing { from { width: 0 } to { width: 100% } }
+
