@@ -224,3 +224,67 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ===== BACKGROUND STATES ===== */
+.background {
+  transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg-intro {
+  filter: blur(15px) brightness(0.9);
+}
+
+.bg-clear {
+  filter: blur(0px) brightness(1);
+}
+
+.bg-about {
+  filter: blur(20px) brightness(0.85);
+}
+
+/* ===== GREETING ===== */
+.greeting {
+  position: fixed;
+  top: 26px;
+  left: 130px;
+
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+
+  color: rgba(255,255,255,0.75);
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  z-index: 18;
+}
+
+.greeting.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== TASKBAR (TOP) ===== */
+.taskbar {
+  top: -80px;
+  bottom: auto;
+  transition: top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.taskbar.show {
+  top: 20px;
+}
+
+/* ===== PROFILE HERO MOVE (NO ZOOM) ===== */
+.profile.move {
+  top: 20px;
+  left: 20px;
+  width: 82px;
+  border-radius: 28%;
+  transform: translate(0,0) scale(1);
+}
