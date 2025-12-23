@@ -34,7 +34,7 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .loader.hide{opacity:0;pointer-events:none;transition:.4s;}
 
-/* INTRO (PROFILE CONTAINER) */
+/* INTRO: fullscreen center */
 .intro{
   position:fixed;
   inset:0;
@@ -49,22 +49,23 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .intro.hide{opacity:0;pointer-events:none;}
 
+/* COLUMN: picture on top, caption under, finger-width gap */
 .intro-inner{
   display:flex;
-  flex-direction:column;
+  flex-direction:column;    /* vertical stack: profile then caption */
   align-items:center;
-  gap:14px;
+  gap:18px;                 /* distance between picture & caption */
   transition:
     transform .7s cubic-bezier(.22,1,.36,1),
     padding .7s cubic-bezier(.22,1,.36,1);
 }
 
-/* PROFILE PIC (hero) */
+/* PROFILE PICTURE (hero target) */
 .profile{
   width:180px;
   aspect-ratio:1;
   opacity:0;
-  transform:translateY(18px) scale(.94);
+  transform:translateY(18px) scale(0.94); /* intro start */
   clip-path:circle(50% at 50% 50%);
   transition:
     opacity 0.9s cubic-bezier(.22,1,.36,1),
@@ -75,52 +76,50 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .profile.show{
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:translateY(0) scale(1);       /* end of intro */
 }
 .profile.move{
-  width:79px;
+  width:80px;                              /* hero size */
   clip-path:circle(56% at 50% 50%);
 }
 
-/* HERO POSITION: only profile container moves */
+/* HERO POSITION: move only this block to top-left */
 .intro.moveIntro{
   align-items:flex-start;
   justify-content:flex-start;
 }
 .intro.moveIntro .intro-inner{
   align-items:flex-start;
-  padding:20px 0 0 20px;   /* tweak if needed */
+  padding:20px 0 0 20px;                  /* hero corner offset */
   transform:translateY(0);
 }
 
-/* CAPTION – CENTERED, ZOOM-IN ONLY */
+/* CAPTION – under picture, zoom-in 0.2s, no hero move */
 .welcome{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0.7);
   font-family:"Bebas Neue";
   font-size:32px;
   letter-spacing:3px;
   background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
   display:block;
   text-align:center;
   white-space:nowrap;
 
   opacity:0;
+  transform:translateY(14px) scale(0.7);
   transition:
     opacity 0.2s cubic-bezier(.22,1,.36,1),
     transform 0.2s cubic-bezier(.22,1,.36,1);
 }
 .welcome.show{
   opacity:1;
-  transform:translate(-50%,-50%) scale(1);
+  transform:translateY(0) scale(1);       /* zoom in */
 }
 .welcome.hide{
   opacity:0;
-  transform:translate(-50%,-50%) scale(0.9);
+  transform:translateY(-8px) scale(0.9);
 }
 
 /* GREETING */
@@ -134,10 +133,10 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 .greeting.show{opacity:1;transform:translate(-50%,0);}
 .greeting.blur{filter:blur(8px);opacity:.6;}
 
-/* TASKBAR – BOTTOM CENTER */
+/* TASKBAR – bottom center */
 .taskbar{
   position:fixed;
-  bottom:-80px;          /* hidden below screen initially */
+  bottom:-80px;
   left:50%;
   transform:translateX(-50%);
   height:56px;
