@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => profile.classList.add("show"), 200);
     setTimeout(() => {
       caption.classList.add("show");
-      // start subtle pulse after it has grown
+      // start subtle pulse after initial grow
       setTimeout(() => caption.classList.add("pulse"), 900);
     }, 350);
 
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       profile.classList.add("move");
     }, 350 + introDuration + 150);
 
-    // 3) background, greeting, taskbar
+    // 3) BG, greeting, taskbar
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
