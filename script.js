@@ -1,68 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const profile  = document.getElementById("profile");
-  const caption  = document.getElementById("caption");
-  const loader   = document.getElementById("loader");
-  const taskbar  = document.getElementById("taskbar");
-  const greeting = document.getElementById("greeting");
-  const bg       = document.querySelector(".background");
-  const about    = document.getElementById("about");
-  const aboutBtn = document.getElementById("aboutBtn");
-  const homeBtn  = document.getElementById("homeBtn");
-  const intro    = document.getElementById("intro");
+  const profile = document.getElementById("profile"),
+        caption = document.getElementById("caption"),
+        loader = document.getElementById("loader"),
+        taskbar = document.getElementById("taskbar"),
+        greeting = document.getElementById("greeting"),
+        bg = document.querySelector(".background"),
+        about = document.getElementById("about"),
+        aboutBtn = document.getElementById("aboutBtn"),
+        homeBtn = document.getElementById("homeBtn");
 
-  /* GREETING LOGIC */
+  // Greeting logic
   const h = new Date().getHours();
-  greeting.textContent =
-    h < 12 ? "GOOD MORNING" :
-    h < 17 ? "GOOD AFTERNOON" :
-    "GOOD EVENING";
+  greeting.textContent = h < 12 ? "GOOD MORNING" : h < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
 
-  // Animation Sequence
+  // Startup sequence
   setTimeout(() => {
-    // Hide Loader
     loader.classList.add("hide");
-
-    // 1. Show Profile
-    setTimeout(() => profile.classList.add("show"), 300);
-
-    // 2. Show Caption (Name)
-    setTimeout(() => caption.classList.add("show"), 800);
-
-    // 3. Move to Corner & Hide Caption
+    setTimeout(() => profile.classList.add("show"), 400);
+    setTimeout(() => caption.classList.add("show"), 900);
     setTimeout(() => {
-      caption.classList.remove("show");
-      caption.classList.add("hide");
-      
-      intro.classList.add("moveIntro");
       profile.classList.add("move");
-    }, 2200);
-
-    // 4. Reveal Background and Taskbar
+      caption.classList.add("freedom");
+    }, 2400);
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
       taskbar.classList.add("show");
-    }, 2800);
-
+    }, 3000);
   }, 800);
 
-  /* INTERACTION LOGIC */
-  let opened = false;
-
-  aboutBtn.onclick = (e) => {
-    e.preventDefault();
-    opened = !opened;
-    about.classList.toggle("show", opened);
-    bg.classList.toggle("bg-about", opened);
-    greeting.classList.toggle("blur", opened);
+  // About Toggle with deep blur
+  aboutBtn.onclick = () => {
+    about.classList.add("show");
+    bg.classList.add("bg-about");
+    greeting.style.opacity = "0"; // Hide greeting to focus on About
   };
 
-  homeBtn.onclick = (e) => {
-    e.preventDefault();
-    opened = false;
+  homeBtn.onclick = () => {
     about.classList.remove("show");
     bg.classList.remove("bg-about");
-    greeting.classList.remove("blur");
+    greeting.style.opacity = "1";
   };
 });
-
