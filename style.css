@@ -11,25 +11,32 @@ body {
   overflow-x: hidden;
 }
 
-/* ================= BACKGROUND VIDEO ================= */
-.background {
+/* ================= BACKGROUND (VIDEO WRAPPER) ================= */
+.background-wrapper {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  filter: blur(15px) brightness(0.9);
   z-index: -2;
+  overflow: hidden;
 
   transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.background.bg-clear {
+.background-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* background states */
+.bg-intro {
+  filter: blur(15px) brightness(0.9);
+}
+
+.bg-clear {
   filter: blur(0px) brightness(1);
 }
 
-.background.bg-about {
+.bg-about {
   filter: blur(20px) brightness(0.85);
 }
 
@@ -38,7 +45,6 @@ body {
   position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 10;
@@ -50,20 +56,18 @@ body {
   pointer-events: none;
 }
 
-/* ================= PROFILE (HERO ANIMATION) ================= */
+/* ================= PROFILE (HERO / SHARED ELEMENT) ================= */
 .profile {
   position: fixed;
-
-  /* initial hero position (slightly top-center) */
   top: 44%;
   left: 50%;
-  transform: translate(-50%, 20px);
 
   width: 180px;
   aspect-ratio: 1;
   border-radius: 50%;
   opacity: 0;
 
+  transform: translate(-50%, 20px);
   z-index: 20;
 
   transition:
@@ -77,25 +81,26 @@ body {
   will-change: transform, top, left, width;
 }
 
-/* profile enters */
 .profile.show {
   opacity: 1;
   transform: translate(-50%, -10px);
 }
 
-/* hero shared-element move (NO ZOOM) */
+/* HERO MOVE (NO ZOOM, PURE SHARED ELEMENT) */
 .profile.move {
-  top: 20px;
-  left: 20px;
-  width: 84px;
-  border-radius: 28%;
+  top: 18px;
+  left: 18px;
+  width: 82px;
+  border-radius: 26%;
   transform: translate(0, 0);
 }
 
 /* ================= WELCOME ================= */
 .welcome {
-  position: relative;
-  margin-top: calc(180px + 28px);
+  position: absolute;
+  top: calc(44% + 110px);
+  left: 50%;
+  transform: translate(-50%, 18px);
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
@@ -107,22 +112,22 @@ body {
   -webkit-text-fill-color: transparent;
 
   opacity: 0;
-  transform: translateY(18px);
+
   transition:
     opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 
-  z-index: 5;
+  z-index: 9;
 }
 
 .welcome.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .welcome.hide {
   opacity: 0;
-  transform: translateY(-12px);
+  transform: translate(-50%, -12px);
 }
 
 /* ================= GREETING ================= */
@@ -130,13 +135,13 @@ body {
   position: fixed;
   top: 22%;
   left: 50%;
-  transform: translate(-50%, 16px);
+  transform: translate(-50%, 18px);
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 30px;
   letter-spacing: 2px;
 
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 6px 20px rgba(0,0,0,0.35);
 
   opacity: 0;
@@ -152,12 +157,13 @@ body {
   transform: translate(-50%, 0);
 }
 
-/* ================= TASKBAR (TOP) ================= */
+/* ================= TASKBAR (TOP, GLASSY) ================= */
 .taskbar {
   position: fixed;
   top: -80px;
   left: 50%;
   transform: translateX(-50%);
+
   height: 56px;
   padding: 0 36px;
 
@@ -165,9 +171,9 @@ body {
   align-items: center;
   gap: 36px;
 
-  background: rgba(20, 40, 55, 0.75);
-  backdrop-filter: blur(14px);
-  border-radius: 16px;
+  background: rgba(20, 40, 55, 0.65);
+  backdrop-filter: blur(18px);
+  border-radius: 18px;
 
   font-family: "Helvetica Neue", Arial, sans-serif;
   font-weight: bold;
@@ -181,12 +187,32 @@ body {
   top: 18px;
 }
 
+/* hover focus effect */
+.taskbar:hover a {
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+.taskbar a {
+  color: #E6EEF3;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+
+.taskbar a:hover {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(-3px) scale(1.05);
+}
+
 /* ================= ABOUT ME ================= */
 .about {
   display: none;
   padding: 140px 40px 80px;
   max-width: 900px;
   margin: 0 auto;
+  z-index: 5;
 }
 
 .about h2 {
@@ -217,6 +243,7 @@ body {
 .about-text {
   opacity: 0;
   transform: translateY(14px);
+
   animation: paragraphReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: 2s;
 
