@@ -1,259 +1,183 @@
-/* ================= RESET ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #E6EEF3;
+  color: #e6eef3;
   overflow-x: hidden;
 }
 
-/* ================= BACKGROUND (VIDEO WRAPPER) ================= */
-.background-wrapper {
+/* BACKGROUND VIDEO (NO MOVEMENT BUG) */
+.background {
   position: fixed;
   inset: 0;
-  z-index: -2;
-  overflow: hidden;
-
-  transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.background-wrapper video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(18px) brightness(0.9);
+  transform: scale(1.05); /* prevents edge flicker */
+  transition: filter 0.9s cubic-bezier(0.22,1,0.36,1);
+  z-index: -2;
 }
 
-/* background states */
-.bg-intro {
-  filter: blur(15px) brightness(0.9);
-}
-
-.bg-clear {
+.background.bg-clear {
   filter: blur(0px) brightness(1);
 }
 
-.bg-about {
+.background.bg-about {
   filter: blur(20px) brightness(0.85);
 }
 
-/* ================= INTRO ================= */
+/* LOADER */
+.loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 30;
+  background: transparent;
+}
+
+.loader span {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.loader span:nth-child(2) { animation-delay: .15s; }
+.loader span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.loader.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+/* INTRO */
 .intro {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 10;
-  transition: opacity 0.4s ease;
 }
 
-.intro.hide {
-  opacity: 0;
-  pointer-events: none;
-}
+.intro.hide { opacity: 0; pointer-events: none; }
 
-/* ================= PROFILE (HERO / SHARED ELEMENT) ================= */
+/* PROFILE (HERO) */
 .profile {
   position: fixed;
-  top: 44%;
+  top: 45%;
   left: 50%;
-
+  transform: translate(-50%, 30px);
   width: 180px;
-  aspect-ratio: 1;
   border-radius: 50%;
   opacity: 0;
-
-  transform: translate(-50%, 20px);
-  z-index: 20;
-
   transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    top 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    left 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-
-  will-change: transform, top, left, width;
+    opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+    transform 0.8s cubic-bezier(0.22,1,0.36,1),
+    top 0.8s cubic-bezier(0.22,1,0.36,1),
+    left 0.8s cubic-bezier(0.22,1,0.36,1),
+    width 0.8s cubic-bezier(0.22,1,0.36,1);
+  z-index: 20;
 }
 
 .profile.show {
   opacity: 1;
-  transform: translate(-50%, -10px);
+  transform: translate(-50%, 0);
 }
 
-/* HERO MOVE (NO ZOOM, PURE SHARED ELEMENT) */
 .profile.move {
-  top: 18px;
-  left: 18px;
-  width: 82px;
-  border-radius: 26%;
-  transform: translate(0, 0);
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  transform: translate(0,0);
 }
 
-/* ================= WELCOME ================= */
+/* WELCOME */
 .welcome {
-  position: absolute;
-  top: calc(44% + 110px);
-  left: 50%;
-  transform: translate(-50%, 18px);
-
+  margin-top: 220px;
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
-  text-align: center;
-
-  background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
   opacity: 0;
-
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-
-  z-index: 9;
+  transform: translateY(20px);
+  transition: all 0.7s cubic-bezier(0.22,1,0.36,1);
 }
 
 .welcome.show {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
 }
 
 .welcome.hide {
   opacity: 0;
-  transform: translate(-50%, -12px);
+  transform: translateY(-10px);
 }
 
-/* ================= GREETING ================= */
+/* GREETING */
 .greeting {
   position: fixed;
   top: 22%;
   left: 50%;
-  transform: translate(-50%, 18px);
-
+  transform: translate(-50%, 15px);
   font-family: "Bebas Neue", sans-serif;
   font-size: 30px;
-  letter-spacing: 2px;
-
-  color: rgba(255, 255, 255, 0.75);
-  text-shadow: 0 6px 20px rgba(0,0,0,0.35);
-
   opacity: 0;
+  transition: all .6s cubic-bezier(0.22,1,0.36,1);
   z-index: 8;
-
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .greeting.show {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(-50%,0);
 }
 
-/* ================= TASKBAR (TOP, GLASSY) ================= */
+/* TASKBAR */
 .taskbar {
   position: fixed;
   top: -80px;
   left: 50%;
   transform: translateX(-50%);
-
-  height: 56px;
+  background: rgba(20,40,55,.75);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
   padding: 0 36px;
-
+  height: 56px;
   display: flex;
-  align-items: center;
   gap: 36px;
-
-  background: rgba(20, 40, 55, 0.65);
-  backdrop-filter: blur(18px);
-  border-radius: 18px;
-
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-weight: bold;
-  letter-spacing: 1px;
-
-  transition: top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  align-items: center;
+  transition: top .6s cubic-bezier(0.22,1,0.36,1);
   z-index: 15;
 }
 
-.taskbar.show {
-  top: 18px;
-}
-
-/* hover focus effect */
-.taskbar:hover a {
-  filter: blur(4px);
-  opacity: 0.5;
-}
+.taskbar.show { top: 20px; }
 
 .taskbar a {
-  color: #E6EEF3;
-  text-decoration: none;
-  position: relative;
-  transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+  cursor: pointer;
+  color: rgba(230,238,243,.75);
+  transition: transform .25s ease, filter .25s ease;
 }
 
-.taskbar a:hover {
-  filter: blur(0);
-  opacity: 1;
-  transform: translateY(-3px) scale(1.05);
-}
+.taskbar:hover a { filter: blur(1.5px); }
+.taskbar a:hover { transform: scale(1.15); filter: blur(0); }
 
-/* ================= ABOUT ME ================= */
+/* ABOUT */
 .about {
   display: none;
-  padding: 140px 40px 80px;
   max-width: 900px;
-  margin: 0 auto;
-  z-index: 5;
+  margin: 140px auto;
+  padding: 40px;
 }
 
-.about h2 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 42px;
-  margin-bottom: 24px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid rgba(159, 217, 245, 0.9);
-
-  max-width: 0;
-  width: max-content;
-
-  animation:
-    typingAbout 1.8s steps(10, end) forwards,
-    stopCursor 0.01s linear forwards 1.9s;
-}
-
-@keyframes typingAbout {
-  to { max-width: 100%; }
-}
-
-@keyframes stopCursor {
-  to { border-right-color: transparent; }
-}
-
-.about-text {
-  opacity: 0;
-  transform: translateY(14px);
-
-  animation: paragraphReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 2s;
-
-  color: rgba(230, 238, 243, 0.88);
-  text-shadow: 0 6px 18px rgba(0,0,0,0.25);
-}
-
-@keyframes paragraphReveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+.about.show { display: block; }
