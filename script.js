@@ -29,9 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // move whole intro (profile + caption) to top-left
     setTimeout(() => {
       intro.classList.add("moveIntro");
-      // optional: shrink avatar a bit while it moves
       profile.classList.add("move");
-      // optional: hide caption later if you want it to disappear
+      // keep caption visible; remove next line if you want it to fade
       // caption.classList.add("hide");
     }, 2400);
 
