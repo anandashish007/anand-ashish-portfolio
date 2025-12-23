@@ -64,7 +64,7 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   width:180px;
   aspect-ratio:1;
   opacity:0;
-  transform:translateY(25px) scale(.93);
+  transform:translateY(18px) scale(.94);
   clip-path:circle(50% at 50% 50%);
   transition:
     opacity 0.9s cubic-bezier(.22,1,.36,1),
