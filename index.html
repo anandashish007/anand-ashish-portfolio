@@ -5,91 +5,54 @@
   <title>Anand Ashish | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- STYLES -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ================= BACKGROUND VIDEO ================= -->
+  <!-- BACKGROUND VIDEO -->
   <video class="background" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
   </video>
 
-  <!-- ================= LOADER ================= -->
+  <!-- LOADER -->
   <div class="loader" id="loader">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 
-  <!-- ================= GREETING ================= -->
+  <!-- GREETING -->
   <div class="greeting" id="greeting"></div>
 
-  <!-- ================= INTRO ================= -->
+  <!-- INTRO (PROFILE + CAPTION) -->
   <div class="intro" id="intro">
 
-    <!-- PROFILE -->
-    <img
-      src="profile.jpg"
-      id="profile"
-      class="profile"
-      alt="Anand Ashish Profile Photo"
-    />
+    <img src="profile.jpg" id="profile" class="profile" alt="profile" />
 
-    <!-- CAPTION -->
-    <div class="welcome" id="caption">
-      WELCOME TO MY PORTFOLIO
-    </div>
+    <div class="welcome" id="caption">WELCOME TO MY PORTFOLIO</div>
 
   </div>
 
-  <!-- ================= TASKBAR ================= -->
+  <!-- TASKBAR -->
   <nav class="taskbar" id="taskbar">
-    <button id="homeBtn">HOME</button>
+    <a id="homeBtn">HOME</a>
     <a href="projects.html">PROJECTS</a>
     <a href="resume.html">RESUME</a>
     <a href="certificates.html">CERTIFICATES</a>
-    <button id="aboutBtn">ABOUT</button>
+    <a id="aboutBtn">ABOUT</a>
   </nav>
 
-  <!-- ================= ABOUT ME ================= -->
+  <!-- ABOUT -->
   <section class="about" id="about">
     <h2>ABOUT ME</h2>
-
     <p class="about-text">
-      I am a Computer Science and Engineering student with a heart full of ambition
-      and a mind wired for logic. From the first line of code I wrote, I felt drawn
-      to the world of software and innovation.
-
-      I believe technology is not just about machines, but about shaping a better
-      future for people. My goal is to become a successful software engineer who
-      creates meaningful and efficient solutions.
-
-      I am constantly learning new programming languages and improving my
-      problem-solving skills. Challenges motivate me, and failures teach me lessons
-      that push me forward.
-
-      I know that consistency and discipline are the true keys to achievement.
-      Every day, I work harder to strengthen my technical and analytical abilities.
-
-      I dream of contributing to real-world projects that make life smarter and
-      simpler. One day, I will proudly stand as a software engineer who turned
-      dreams into reality.
+      I am a Computer Science and Engineering student with a heart full of ambition...
     </p>
   </section>
 
-  <!-- ================= SCRIPT ================= -->
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
