@@ -1,4 +1,65 @@
-/* PROFILE PIC (the one that gets hero animation) */
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
+
+/* BACKGROUND */
+.background{
+  position:fixed;inset:0;width:100%;height:100%;
+  object-fit:cover;
+  transform:scale(1.06);
+  filter:blur(18px) brightness(0.9);
+  transition:filter .9s cubic-bezier(.22,1,.36,1);
+  z-index:-2;
+}
+.background.bg-clear{filter:blur(0) brightness(1);}
+.background.bg-about{filter:blur(20px) brightness(.85);}
+
+/* LOADER */
+.loader{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;z-index:40;
+}
+.loader span{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,.85);
+  animation:load 1s infinite ease-in-out;
+}
+.loader span:nth-child(2){animation-delay:.15s;}
+.loader span:nth-child(3){animation-delay:.3s;}
+@keyframes load{
+  0%{transform:scale(.6);opacity:.4;}
+  50%{transform:scale(1);opacity:1;}
+  100%{transform:scale(.6);opacity:.4;}
+}
+.loader.hide{opacity:0;pointer-events:none;transition:.4s;}
+
+/* INTRO (PROFILE CONTAINER) */
+.intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  transform:translateY(-30px);
+  transition:
+    opacity .5s ease,
+    transform .7s cubic-bezier(.22,1,.36,1);
+}
+.intro.hide{opacity:0;pointer-events:none;}
+
+.intro-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  transition:
+    transform .7s cubic-bezier(.22,1,.36,1),
+    padding .7s cubic-bezier(.22,1,.36,1);
+}
+
+/* PROFILE PIC (hero) */
 .profile{
   width:180px;
   aspect-ratio:1;
@@ -21,44 +82,23 @@
   clip-path:circle(56% at 50% 50%);
 }
 
-/* INTRO container that moves the picture to hero corner */
-.intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-  transform:translateY(-30px);
-  transition:
-    opacity .5s ease,
-    transform .7s cubic-bezier(.22,1,.36,1);
-}
-.intro-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:14px;
-  transition:
-    transform .7s cubic-bezier(.22,1,.36,1),
-    padding .7s cubic-bezier(.22,1,.36,1);
-}
+/* HERO POSITION: only profile block moves */
 .intro.moveIntro{
   align-items:flex-start;
   justify-content:flex-start;
 }
 .intro.moveIntro .intro-inner{
   align-items:flex-start;
-  padding:20px 0 0 20px; /* adjust if needed */
+  padding:20px 0 0 20px;   /* adjust to taste */
   transform:translateY(0);
 }
 
-/* CAPTION – centered, zoom-in only, NEVER moves to hero */
+/* CAPTION – centered, zoom-in only */
 .welcome{
   position:fixed;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%) scale(0.7); /* start smaller */
+  transform:translate(-50%,-50%) scale(0.7);
   font-family:"Bebas Neue";
   font-size:32px;
   letter-spacing:3px;
@@ -76,6 +116,56 @@
 }
 .welcome.show{
   opacity:1;
-  transform:translate(-50%,-50%) scale(1); /* quick zoom in */
+  transform:translate(-50%,-50%) scale(1);
 }
-/* no pulse, no hero class here */
+.welcome.hide{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(0.9);
+}
+
+/* GREETING */
+.greeting{
+  position:fixed;top:22%;left:50%;
+  transform:translate(-50%,16px);
+  font-family:"Bebas Neue";font-size:30px;
+  opacity:0;z-index:5;
+  transition:.6s cubic-bezier(.22,1,.36,1);
+}
+.greeting.show{opacity:1;transform:translate(-50%,0);}
+.greeting.blur{filter:blur(8px);opacity:.6;}
+
+/* TASKBAR GLASS – BOTTOM CENTER */
+.taskbar{
+  position:fixed;
+  bottom:-80px;           /* start hidden below */
+  left:50%;
+  transform:translateX(-50%);
+  height:56px;
+  padding:0 36px;
+  display:flex;
+  gap:36px;
+  align-items:center;
+  background:rgba(20,40,55,.55);
+  backdrop-filter:blur(18px) saturate(180%);
+  border-radius:16px;
+  box-shadow:0 -14px 32px rgba(0,0,0,0.28);
+  transition:bottom .6s cubic-bezier(.22,1,.36,1);
+  z-index:15;
+}
+.taskbar.show{bottom:20px;}
+.taskbar a{color:#e6eef3c7;transition:.25s;}
+.taskbar:hover a{filter:blur(2px);opacity:.55;}
+.taskbar a:hover{filter:none;opacity:1;transform:translateY(-4px) scale(1.08);}
+
+/* ABOUT SECTION */
+.about{
+  opacity:0;pointer-events:none;
+  max-width:900px;margin:140px auto;padding:40px;
+  transform:translateY(20px);
+  transition:.6s cubic-bezier(.22,1,.36,1);
+}
+.about.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
