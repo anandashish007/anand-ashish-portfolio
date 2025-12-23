@@ -96,7 +96,7 @@ body {
 /* ================= PROFILE ================= */
 .profile {
   position: fixed;
-  top: 50%;
+  top: 46%;
   left: 50%;
 
   width: 180px;
@@ -143,11 +143,299 @@ body {
 /* ================= WELCOME ================= */
 .welcome {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 34px;
-  letter-spacing: 3px;
+  font-size: 30px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  white-space: nowrap;
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #e6eef3;
+  overflow-x: hidden;
+}
+
+/* ================= BACKGROUND VIDEO ================= */
+.background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* prevent edge jitter */
+  transform: scale(1.06);
+  transform-origin: center;
+  will-change: filter;
+
+  filter: blur(18px) brightness(0.9);
+  transition: filter 0.9s cubic-bezier(0.22,1,0.36,1);
+  z-index: -2;
+}
+
+.background.bg-clear {
+  filter: blur(0) brightness(1);
+}
+
+.background.bg-about {
+  filter: blur(20px) brightness(0.85);
+}
+
+/* ================= LOADER ================= */
+.loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 40;
+  background: transparent;
+}
+
+.loader span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  animation: loaderPulse 1s infinite ease-in-out;
+}
+
+.loader span:nth-child(2) { animation-delay: 0.15s; }
+.loader span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes loaderPulse {
+  0%   { transform: scale(0.6); opacity: 0.4; }
+  50%  { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(0.6); opacity: 0.4; }
+}
+
+.loader.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* ================= INTRO ================= */
+.intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  transform: translateY(-20px);
+  z-index: 10;
+
+  transition: opacity 0.5s ease;
+}
+
+.intro.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ================= PROFILE ================= */
+.profile {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 180px;
+  aspect-ratio: 1;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    translateY(20px)
+    scale(0.95);
+
+  clip-path: circle(50% at 50% 50%);
+  transform-origin: center;
+
+  z-index: 20;
+
+  transition:
+    opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+    transform 0.9s cubic-bezier(0.22,1,0.36,1),
+    width 0.9s cubic-bezier(0.22,1,0.36,1),
+    clip-path 0.9s cubic-bezier(0.22,1,0.36,1);
+
+  will-change: transform, width, clip-path;
+}
+
+.profile.show {
+  opacity: 1;
+  transform:
+    translate(-50%, -50%)
+    translateY(0)
+    scale(1);
+}
+
+/* HERO MOVE — continuous, no pause */
+.profile.move {
+  width: 82px;
+  transform:
+    translate(-50%, -50%)
+    translate(-50vw + 20px, -50vh + 20px);
+
+  clip-path: circle(45% at 50% 50%);
+}
+
+  /* ================= WELCOME ================= */
+   .welcome {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;              /* ⬅ reduced slightly */
+  letter-spacing: 2.5px;
   text-align: center;
   white-space: nowrap;
 
+  margin-top: 6px;              /* ⬅ ensures it sits BELOW profile */
+
+  background: linear-gradient(
+    90deg,
+    #e6eef3,
+    #9fd9f5,
+    #e6eef3
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  transition:
+    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+    transform 0.6s cubic-bezier(0.22,1,0.36,1);
+
+  z-index: 15;
+}
+
+/* ================= GREETING ================= */
+.greeting {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%,16px);
+
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.78);
+
+  opacity: 0;
+  z-index: 8;
+
+  transition:
+    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+    transform 0.6s cubic-bezier(0.22,1,0.36,1),
+    filter 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+
+.greeting.show {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+
+.greeting.blur {
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* ================= TASKBAR ================= */
+.taskbar {
+  position: fixed;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 56px;
+  padding: 0 36px;
+
+  display: flex;
+  align-items: center;
+  gap: 36px;
+
+  background: rgba(20,40,55,0.55);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 32px rgba(0,0,0,0.28);
+
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  transition: top 0.6s cubic-bezier(0.22,1,0.36,1);
+  z-index: 15;
+}
+
+.taskbar.show {
+  top: 18px;
+}
+
+.taskbar a {
+  color: rgba(230,238,243,0.78);
+  cursor: pointer;
+
+  transition:
+    transform 0.25s cubic-bezier(0.22,1,0.36,1),
+    filter 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.taskbar:hover a {
+  filter: blur(2px);
+  opacity: 0.55;
+}
+
+.taskbar a:hover {
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* ================= ABOUT ================= */
+.about {
+  max-width: 900px;
+  margin: 140px auto;
+  padding: 40px;
+
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+    transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+
+.about.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.about h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 42px;
+  margin-bottom: 24px;
+}
+
+.about-text {
+  color: rgba(230,238,243,0.88);
+  line-height: 1.75;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
   background: linear-gradient(90deg, #e6eef3, #9fd9f5, #e6eef3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
