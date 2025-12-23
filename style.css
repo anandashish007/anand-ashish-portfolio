@@ -5,10 +5,9 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 /* BACKGROUND */
 .background {
   position: fixed; inset: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  transform: scale(1.06);
+  object-fit: cover; transform: scale(1.06);
   filter: blur(18px) brightness(0.9);
-  transition: filter .9s cubic-bezier(.22,1,.36,1);
+  transition: filter .8s cubic-bezier(.22,1,.36,1);
   z-index: -2;
 }
 .background.bg-clear { filter: blur(0) brightness(1); }
@@ -16,147 +15,78 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 
 /* LOADER */
 .loader {
-  position: fixed; inset: 0;
-  display: flex; align-items: center; justify-content: center;
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
   gap: 10px; z-index: 40; background: #0b1116;
 }
 .loader span {
   width: 10px; height: 10px; border-radius: 50%;
-  background: rgba(255,255,255,.85);
-  animation: load 1s infinite ease-in-out;
+  background: rgba(255,255,255,.85); animation: load 1s infinite ease-in-out;
 }
 .loader span:nth-child(2) { animation-delay: .15s; }
 .loader span:nth-child(3) { animation-delay: .3s; }
-@keyframes load {
-  0%, 100% { transform: scale(.6); opacity: .4; }
-  50% { transform: scale(1); opacity: 1; }
-}
+@keyframes load { 0%, 100% { transform: scale(.6); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
 .loader.hide { opacity: 0; pointer-events: none; transition: .4s; }
 
-/* INTRO CONTAINER */
+/* INTRO */
 .intro {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: opacity .5s ease;
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: opacity .5s ease;
 }
-.intro.hide { opacity: 0; pointer-events: none; }
-
 .intro-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; width: 100%; height: 100%; justify-content: center;
   gap: 18px;
-  transition: transform 0.9s cubic-bezier(.22,1,.36,1);
 }
 
-/* PROFILE PICTURE */
+/* PROFILE */
 .profile {
-  width: 180px;
-  aspect-ratio: 1;
-  opacity: 0;
+  width: 180px; aspect-ratio: 1; opacity: 0;
   transform: translateY(18px) scale(0.94);
   clip-path: circle(50% at 50% 50%);
-  transition: 
-    opacity 0.9s cubic-bezier(.22,1,.36,1), 
-    transform 0.9s cubic-bezier(.22,1,.36,1),
-    clip-path 0.9s cubic-bezier(.22,1,.36,1);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
 }
-.profile.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Move ONLY the picture to the corner - Independent from text */
+.profile.show { opacity: 1; transform: translateY(0) scale(1); }
 .profile.move {
   position: absolute;
   transform: translate(-38vw, -42vh) scale(0.45);
-  transform-origin: center;
 }
 
-/* CAPTION / WELCOME TEXT */
+/* WELCOME */
 .welcome {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 32px;
-  letter-spacing: 3px;
+  font-family: "Bebas Neue", sans-serif; font-size: 32px; letter-spacing: 3px;
   background: linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  opacity: 0;
-  transform: translateY(14px) scale(0.7);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0; transform: translateY(14px) scale(0.8);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.welcome.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* 0.1s Snappy Freedom Snap */
+.welcome.show { opacity: 1; transform: translateY(0) scale(1); }
 .welcome.freedom {
-  transition: transform 0.1s ease-out; 
+  transition: transform 0.1s ease-out; /* Snap speed */
   transform: translateY(-60px); 
 }
 
-/* GREETING */
+/* UI */
 .greeting {
-  position: fixed; top: 22%; left: 50%;
-  transform: translate(-50%, 16px);
-  font-family: "Bebas Neue", sans-serif; font-size: 30px;
-  opacity: 0; z-index: 5;
+  position: fixed; top: 22%; left: 50%; transform: translate(-50%, 16px);
+  font-family: "Bebas Neue"; font-size: 30px; opacity: 0; z-index: 5;
   transition: .6s cubic-bezier(.22,1,.36,1);
 }
 .greeting.show { opacity: 1; transform: translate(-50%, 0); }
-.greeting.blur { filter: blur(8px); opacity: .6; }
-
-/* TASKBAR */
 .taskbar {
-  position: fixed; bottom: -80px; left: 50%;
-  transform: translateX(-50%);
-  height: 56px; padding: 0 36px;
-  display: flex; gap: 36px; align-items: center;
-  background: rgba(20,40,55,.55);
-  backdrop-filter: blur(18px) saturate(180%);
-  border-radius: 16px;
-  box-shadow: 0 -14px 32px rgba(0,0,0,0.28);
-  transition: bottom .6s cubic-bezier(.22,1,.36,1);
-  z-index: 15;
+  position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+  height: 56px; padding: 0 36px; display: flex; gap: 36px; align-items: center;
+  background: rgba(20,40,55,.55); backdrop-filter: blur(18px); border-radius: 16px;
+  transition: bottom .6s cubic-bezier(.22,1,.36,1); z-index: 15;
 }
 .taskbar.show { bottom: 20px; }
 .taskbar a { color: #e6eef3c7; text-decoration: none; transition: .25s; cursor: pointer; }
-.taskbar:hover a { filter: blur(2px); opacity: .55; }
-.taskbar a:hover { filter: none; opacity: 1; transform: translateY(-4px) scale(1.08); }
 
-/* ABOUT SECTION */
+/* ABOUT */
 .about {
-  position: fixed; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0; pointer-events: none;
-  max-width: 900px; width: 85%; padding: 40px;
-  z-index: 30;
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  opacity: 0; pointer-events: none; width: 85%; max-width: 900px; z-index: 30;
 }
 .about.show { opacity: 1; pointer-events: auto; }
-
-.about h2 {
-  font-family: "Bebas Neue"; font-size: 48px;
-  overflow: hidden; white-space: nowrap;
-  border-right: 3px solid #9fd9f5; width: 0;
-}
+.about h2 { font-family: "Bebas Neue"; font-size: 48px; overflow: hidden; white-space: nowrap; border-right: 3px solid #9fd9f5; width: 0; }
 .about.show h2 { animation: typing 1.5s steps(30, end) forwards; }
-
-.about-text {
-  opacity: 0; transform: translateY(20px);
-}
-.about.show .about-text {
-  opacity: 1; transform: translateY(0);
-  transition: all 1s cubic-bezier(.22,1,.36,1) 1.2s;
-}
-
 @keyframes typing { from { width: 0 } to { width: 100% } }
-
