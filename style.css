@@ -19,9 +19,10 @@ body {
   height: 100%;
   object-fit: cover;
 
+  /* prevent edge jitter */
   transform: scale(1.06);
   transform-origin: center;
-  will-change: transform, filter;
+  will-change: filter;
 
   filter: blur(18px) brightness(0.9);
   transition: filter 0.9s cubic-bezier(0.22,1,0.36,1);
@@ -45,7 +46,8 @@ body {
   align-items: center;
   justify-content: center;
 
-  transform: translateY(-40px);
+  /* slightly higher than center */
+  transform: translateY(-20px);
   z-index: 10;
 
   transition: opacity 0.5s ease;
@@ -58,11 +60,15 @@ body {
 
 /* ================= PROFILE ================= */
 .profile {
+  position: relative; /* 🔑 REQUIRED */
+
   width: 180px;
   aspect-ratio: 1;
-  opacity: 0;
 
+  opacity: 0;
   transform: translateY(20px) scale(0.95);
+
+  /* perfect circular mask */
   clip-path: circle(50% at 50% 50%);
 
   z-index: 20;
@@ -88,22 +94,30 @@ body {
   position: fixed;
   top: 20px;
   left: 20px;
-  width: 82px;
 
+  width: 82px;
   transform: translate(0,0);
-  clip-path: circle(42% at 50% 50%);
+
+  /* still rounded, never square */
+  clip-path: circle(45% at 50% 50%);
 }
 
 /* ================= WELCOME CAPTION ================= */
 .welcome {
-  margin-top: 22px;
+  margin-top: 22px; /* ALWAYS below profile */
+
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
   text-align: center;
   white-space: nowrap;
 
-  background: linear-gradient(90deg, #e6eef3, #9fd9f5, #e6eef3);
+  background: linear-gradient(
+    90deg,
+    #e6eef3,
+    #9fd9f5,
+    #e6eef3
+  );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -192,6 +206,7 @@ body {
   top: 18px;
 }
 
+/* prevent blur on empty hover */
 .taskbar a {
   color: rgba(230,238,243,0.78);
   cursor: pointer;
