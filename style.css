@@ -72,7 +72,6 @@ body {
   transition: opacity 0.4s ease;
 }
 
-/* ================= INTRO LAYER ================= */
 .intro {
   position: fixed;
   inset: 0;
@@ -81,10 +80,10 @@ body {
   align-items: center;
   justify-content: center;
 
-  /* slightly higher than center */
+  gap: 22px;
   transform: translateY(-20px);
-  z-index: 10;
 
+  z-index: 10;
   transition: opacity 0.5s ease;
 }
 
@@ -137,33 +136,19 @@ body {
 }
 
 /* ================= WELCOME CAPTION ================= */
-.welcome {
-  margin-top: 22px;
+.intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 34px;
-  letter-spacing: 3px;
-  text-align: center;
-  white-space: nowrap;
+  gap: 22px;              /* 🔑 THIS fixes overlap */
+  transform: translateY(-20px);
 
-  background: linear-gradient(
-    90deg,
-    #e6eef3,
-    #9fd9f5,
-    #e6eef3
-  );
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  opacity: 0;
-  transform: translateY(12px);
-
-  transition:
-    opacity 0.6s cubic-bezier(0.22,1,0.36,1),
-    transform 0.6s cubic-bezier(0.22,1,0.36,1);
-
-  z-index: 15;
+  z-index: 10;
+  transition: opacity 0.5s ease;
 }
 
 .welcome.show {
