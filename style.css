@@ -78,7 +78,7 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   transform:translateY(0) scale(1);
 }
 .profile.move{
-  width:82px;
+  width:79px;
   clip-path:circle(56% at 50% 50%);
 }
 
