@@ -85,19 +85,25 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 
 /* CAPTION – always under picture */
 .welcome{
-  font-family:"Bebas Neue";font-size:30px;
+  font-family:"Bebas Neue";
+  font-size:30px;
   letter-spacing:3px;
   background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
+  /* optional: let browser size naturally, but make it a block */
+  display:block;         /* sits cleanly under the image */
+  text-align:center;     /* centers text under the circle */
+  /* no width/height, so animation stays smooth */
+
   opacity:0;
   transform:translateY(14px);
   white-space:nowrap;
-  transition:opacity .6s cubic-bezier(.22,1,.36,1),
-             transform .6s cubic-bezier(.22,1,.36,1);
+  transition:
+    opacity .6s cubic-bezier(.22,1,.36,1),
+    transform .6s cubic-bezier(.22,1,.36,1);
 }
-.welcome.show{opacity:1;transform:translateY(0);}
-.welcome.hide{opacity:0;transform:translateY(-12px);}
 
 /* FINAL POSITION: TOP-LEFT, FULLY VISIBLE */
 .intro.moveIntro{
