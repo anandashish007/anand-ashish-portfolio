@@ -18,19 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
     h < 17 ? "GOOD AFTERNOON" :
     "GOOD EVENING";
 
-  const profileInMs = 900;  // same as CSS transition for .profile
+  const profileInMs = 900;  // same as CSS for .profile
 
   setTimeout(() => {
 
     loader.classList.add("hide");
 
-    // 1) profile fade-in
+    // 1) profile fade-in (cubic-bezier intro)
     setTimeout(() => profile.classList.add("show"), 200);
 
-    // 2) caption zoom-in
+    // 2) caption zoom-in under picture
     setTimeout(() => caption.classList.add("show"), 200 + 250);
 
-    // 3) hero move for profile once its cubic-bezier finishes
+    // 3) hero move for profile block once profile animation ends
     setTimeout(() => {
       intro.classList.add("moveIntro");
       profile.classList.add("move");
