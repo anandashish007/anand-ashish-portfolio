@@ -34,15 +34,13 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .loader.hide{opacity:0;pointer-events:none;transition:.4s;}
 
-/* INTRO CONTAINER (CENTERED) */
+/* INTRO FULLSCREEN CONTAINER */
 .intro{
   position:fixed;
   inset:0;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:18px;
   z-index:10;
   transform:translateY(-30px);
   transition:opacity .5s ease,
@@ -50,9 +48,20 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 }
 .intro.hide{opacity:0;pointer-events:none;}
 
+/* INNER COLUMN: PROFILE + CAPTION */
+.intro-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  transition:transform .7s cubic-bezier(.22,1,.36,1),
+             padding .7s cubic-bezier(.22,1,.36,1),
+             align-items .7s cubic-bezier(.22,1,.36,1),
+             justify-content .7s cubic-bezier(.22,1,.36,1);
+}
+
 /* PROFILE PIC */
 .profile{
-  position:relative;
   width:180px;
   aspect-ratio:1;
   opacity:0;
@@ -69,34 +78,35 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   opacity:1;
   transform:translateY(0) scale(1);
 }
-
-/* we no longer move the image alone; keep only size change for later if needed */
 .profile.move{
   width:82px;
   clip-path:circle(45% at 50% 50%);
 }
 
-/* CAPTION */
+/* CAPTION – always under picture */
 .welcome{
   font-family:"Bebas Neue";font-size:30px;
   letter-spacing:3px;
-  margin-top:0;
   background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   opacity:0;
   transform:translateY(14px);
+  white-space:nowrap;
   transition:opacity .6s cubic-bezier(.22,1,.36,1),
              transform .6s cubic-bezier(.22,1,.36,1);
 }
 .welcome.show{opacity:1;transform:translateY(0);}
 .welcome.hide{opacity:0;transform:translateY(-12px);}
 
-/* INTRO FINAL POSITION (TOP-LEFT) */
+/* FINAL POSITION: TOP-LEFT, FULLY VISIBLE */
 .intro.moveIntro{
   align-items:flex-start;
   justify-content:flex-start;
-  padding:20px 0 0 20px; /* tweak these to match your screenshot */
+}
+.intro.moveIntro .intro-inner{
+  align-items:flex-start;
+  padding:20px 0 0 20px; /* adjust these a bit if you want */
   transform:translateY(0);
 }
 
