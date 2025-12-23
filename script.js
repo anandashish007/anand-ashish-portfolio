@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const about    = document.getElementById("about");
   const aboutBtn = document.getElementById("aboutBtn");
   const homeBtn  = document.getElementById("homeBtn");
+  const intro    = document.getElementById("intro");
 
   /* GREETING */
   const h = new Date().getHours();
@@ -25,9 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => profile.classList.add("show"), 300);
     setTimeout(() => caption.classList.add("show"), 400);
 
+    // move whole intro (profile + caption) to top-left
     setTimeout(() => {
+      intro.classList.add("moveIntro");
+      // optional: shrink avatar a bit while it moves
       profile.classList.add("move");
-      caption.classList.add("hide");
+      // optional: hide caption later if you want it to disappear
+      // caption.classList.add("hide");
     }, 2400);
 
     setTimeout(() => {
