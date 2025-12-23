@@ -5,26 +5,29 @@
   <title>Anand Ashish | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Fonts (important for Bebas Neue) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ================= BACKGROUND WRAPPER ================= -->
+  <!-- ================= BACKGROUND (VIDEO WRAPPER) ================= -->
+  <!-- Blur + brightness is controlled on THIS wrapper -->
   <div class="background-wrapper">
-    <video class="background" autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline>
       <source src="bg.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </div>
 
   <!-- ================= GREETING ================= -->
-  <!-- Appears after intro, position handled in CSS -->
+  <!-- Appears after intro, blur synced via wrapper -->
   <div id="greeting" class="greeting"></div>
 
-  <!-- ================= PROFILE (HERO ELEMENT) ================= -->
-  <!-- Shared element / hero animation target -->
+  <!-- ================= PROFILE (HERO / SHARED ELEMENT) ================= -->
   <img
     src="profile.jpg"
     class="profile"
