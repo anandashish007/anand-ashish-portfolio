@@ -1,42 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Anand Ashish | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Hero Animation</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #ffffff;
+            --accent-color: #38bdf8;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Prevents scroll during animation */
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* The Header Section (Hidden initially) */
+        .header {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.2s;
+        }
+
+        .good-morning {
+            font-size: 24px;
+            color: var(--text-color);
+            font-weight: bold;
+            margin-left: 120px; /* Creates that "4 feet" gap from the top-left edge */
+        }
+
+        /* The Profile Picture (The Hero) */
+        .profile-pic {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            background-image: url('https://via.placeholder.com/150'); /* Replace with your image */
+            background-size: cover;
+            
+            /* Hero Animation: Moves from center to top-left corner */
+            animation: heroMove 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards 0.5s;
+        }
+
+        /* The Welcome Caption */
+        .welcome-caption {
+            position: absolute;
+            bottom: -100px; /* Start off-screen */
+            left: 50%;
+            transform: translateX(-50%) scale(0.5);
+            font-size: 48px;
+            color: var(--accent-color);
+            font-weight: 800;
+            text-align: center;
+            opacity: 0;
+            
+            /* Sliding up and scaling to center */
+            animation: captionSlideUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards 0.8s;
+        }
+
+        /* --- Animations --- */
+
+        @keyframes heroMove {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                top: 40px;
+                left: 40px;
+                transform: translate(0, 0) scale(0.6); /* Shrinks slightly to fit corner */
+            }
+        }
+
+        @keyframes captionSlideUp {
+            0% {
+                bottom: -100px;
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5);
+            }
+            100% {
+                bottom: 50%;
+                opacity: 1;
+                transform: translateX(-50%) translateY(50%) scale(1.2);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <video class="background" id="bgVideo" autoplay muted loop playsinline>
-    <source src="bg.mp4" type="video/mp4" />
-  </video>
 
-  <div class="loader" id="loader"><span></span><span></span><span></span></div>
-  <div class="greeting" id="greeting"></div>
+    <div class="container">
+        <div class="profile-pic"></div>
 
-  <div class="intro" id="intro">
-    <div class="intro-inner">
-      <img src="profile.jpg" id="profile" class="profile" alt="profile" />
-      <div class="welcome" id="caption">WELCOME TO MY PORTFOLIO</div>
+        <div class="header">
+            <div class="good-morning">Good Morning</div>
+        </div>
+
+        <h1 class="welcome-caption">WELCOME TO MY PORTFOLIO</h1>
     </div>
-  </div>
 
-  <nav class="taskbar" id="taskbar">
-    <a id="homeBtn">HOME</a>
-    <a href="projects.html">PROJECTS</a>
-    <a href="resume.html">RESUME</a>
-    <a href="certificates.html">CERTIFICATES</a>
-    <a id="aboutBtn">ABOUT</a>
-  </nav>
-
-  <section class="about" id="about">
-    <h2 class="typewriter" id="aboutTitle">ABOUT ME</h2>
-    <p class="about-text" id="aboutText">
-      I am a Computer Science and Engineering student with a heart full of ambition...
-    </p>
-  </section>
-
-  <script src="script.js"></script>
 </body>
 </html>
 
