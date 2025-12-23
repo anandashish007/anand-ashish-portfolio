@@ -82,18 +82,18 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
   clip-path:circle(56% at 50% 50%);
 }
 
-/* HERO POSITION: only profile block moves */
+/* HERO POSITION: only profile container moves */
 .intro.moveIntro{
   align-items:flex-start;
   justify-content:flex-start;
 }
 .intro.moveIntro .intro-inner{
   align-items:flex-start;
-  padding:20px 0 0 20px;   /* adjust to taste */
+  padding:20px 0 0 20px;   /* tweak if needed */
   transform:translateY(0);
 }
 
-/* CAPTION – centered, zoom-in only */
+/* CAPTION – CENTERED, ZOOM-IN ONLY */
 .welcome{
   position:fixed;
   top:50%;
@@ -134,10 +134,10 @@ body{font-family:"Open Sans",sans-serif;color:#e6eef3;overflow-x:hidden;}
 .greeting.show{opacity:1;transform:translate(-50%,0);}
 .greeting.blur{filter:blur(8px);opacity:.6;}
 
-/* TASKBAR GLASS – BOTTOM CENTER */
+/* TASKBAR – BOTTOM CENTER */
 .taskbar{
   position:fixed;
-  bottom:-80px;           /* start hidden below */
+  bottom:-80px;          /* hidden below screen initially */
   left:50%;
   transform:translateX(-50%);
   height:56px;
