@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const profile  = document.getElementById("profile"); // picture only
-  const caption  = document.getElementById("caption"); // text only
+  const profile  = document.getElementById("profile");
+  const caption  = document.getElementById("caption");
   const loader   = document.getElementById("loader");
   const taskbar  = document.getElementById("taskbar");
   const greeting = document.getElementById("greeting");
@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     h < 17 ? "GOOD AFTERNOON" :
     "GOOD EVENING";
 
-  const profileInMs = 900;  // same as CSS for .profile
-  const captionInMs = 200;  // same as CSS for .welcome
+  const profileInMs = 900;  // matches CSS for .profile
+  const captionInMs = 200;  // matches CSS for .welcome
 
   setTimeout(() => {
 
@@ -28,29 +28,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1) profile fade-in
     setTimeout(() => profile.classList.add("show"), 200);
 
-    // 2) caption zoom-in (separate, only 0.2 s)
+    // 2) caption zoom-in
     setTimeout(() => caption.classList.add("show"), 200 + 250);
 
-    // 3) hero animation for profile: starts as soon as its cubic-bezier ends
+    // 3) hero move for profile once cubic-bezier done
     setTimeout(() => {
-      intro.classList.add("moveIntro"); // move container
-      profile.classList.add("move");    // shrink circle
-      // caption is untouched here -> no hero animation on text
+      intro.classList.add("moveIntro");
+      profile.classList.add("move");
     }, 200 + profileInMs);
 
-    // 4) background, greeting, taskbar
+    // 4) background clear + greeting
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
     }, 200 + profileInMs + 300);
 
-    setTimeout(() => taskbar.classList.add("show"),
-      200 + profileInMs + 600
-    );
+    // 5) bottom taskbar slide up
+    setTimeout(() => {
+      taskbar.classList.add("show");
+    }, 200 + profileInMs + 600);
 
   }, 800);
 
-  /* ABOUT TOGGLE */
+  /* ABOUT OPEN/CLOSE */
   let opened = false;
 
   aboutBtn.onclick = () => {
