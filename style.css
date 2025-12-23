@@ -96,22 +96,31 @@ body {
 /* ================= WELCOME CAPTION ================= */
 .welcome {
   position: fixed;
+
+  /* SAME anchor as profile */
   top: 50%;
   left: 50%;
 
-  /* move it BELOW the profile */
-  transform: translate(-50%, calc(90px + 24px));
+  /* Push it DOWN, not sideways */
+  transform: translate(-50%, calc(90px + 28px));
 
   font-family: "Bebas Neue", sans-serif;
   font-size: 34px;
   letter-spacing: 3px;
   text-align: center;
+  white-space: nowrap;
 
-  background: linear-gradient(90deg, #E6EEF3, #9FD9F5, #E6EEF3);
+  background: linear-gradient(
+    90deg,
+    #e6eef3,
+    #9fd9f5,
+    #e6eef3
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
   opacity: 0;
+
   transition:
     opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
