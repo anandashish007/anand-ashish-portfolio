@@ -1,42 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
   const profile = document.getElementById("profile");
-  const welcome = document.getElementById("welcome");
+  const caption = document.getElementById("caption");
   const intro = document.getElementById("intro");
   const taskbar = document.getElementById("taskbar");
   const about = document.getElementById("about");
+  const bg = document.querySelector(".background");
+  const greeting = document.getElementById("greeting");
 
-  // 1. Profile appears
+  // ---- Greeting (Indian Time) ----
+  const hour = new Date().getHours();
+  let greetText = "Good Evening";
+
+  if (hour >= 5 && hour < 12) greetText = "Good Morning";
+  else if (hour >= 12 && hour < 17) greetText = "Good Afternoon";
+
+  greeting.textContent = greetText;
+
+  // ---- Initial background state ----
+  bg.classList.add("bg-intro");
+
+  // 1️⃣ Profile appears (slightly top-center)
   setTimeout(() => {
     profile.classList.add("show");
+  }, 300);
+
+  // 2️⃣ Caption (0.1s delay)
+  setTimeout(() => {
+    caption.classList.add("show");
   }, 400);
 
-  // 2. Welcome appears
-  setTimeout(() => {
-    welcome.classList.add("show");
-  }, 900);
-
-  // 3. Profile moves AFTER welcome finishes
+  // 3️⃣ Profile hero move to top-left
   setTimeout(() => {
     profile.classList.add("move");
-  }, 1700);
+    caption.classList.add("hide");
+  }, 2300);
 
-  // 4. Welcome hides
+  // 4️⃣ Background clears + greeting appears
   setTimeout(() => {
-    welcome.classList.add("hide");
-  }, 1850);
+    bg.classList.remove("bg-intro");
+    bg.classList.add("bg-clear");
+    greeting.classList.add("show");
+  }, 2600);
 
-  // 5. Intro exits
+  // 5️⃣ Intro gone, taskbar slides down
   setTimeout(() => {
     intro.classList.add("hide");
-  }, 2350);
-
-  // 6. Taskbar shows
-  setTimeout(() => {
     taskbar.classList.add("show");
-  }, 2550);
+  }, 3000);
 
-  // 7. About section shows
-  setTimeout(() => {
+  // ---- ABOUT ME toggle ----
+  document.getElementById("aboutBtn").addEventListener("click", () => {
     about.style.display = "block";
-  }, 2900);
+    bg.classList.remove("bg-clear");
+    bg.classList.add("bg-about");
+  });
 });
