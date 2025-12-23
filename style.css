@@ -1,78 +1,95 @@
-/* RESET & BASE */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:"Open Sans", sans-serif; color:#e6eef3; overflow-x:hidden; background:#0b1116; }
-
-/* BACKGROUND - GPU Accelerated */
-.background {
-  position:fixed; inset:0; width:100%; height:100%; object-fit:cover;
-  transform: scale(1.06) translate3d(0,0,0);
-  filter: blur(18px) brightness(0.9);
-  transition: filter 0.8s cubic-bezier(.22,1,.36,1);
-  z-index:-2;
-}
-.background.bg-clear { filter: blur(0) brightness(1); }
-/* Deep 45% style blur for About section */
-.background.bg-about { filter: blur(45px) brightness(0.7); }
-
-/* INTRO SYSTEM */
-.intro { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:10; }
-.intro-inner { display:flex; flex-direction:column; align-items:center; position:relative; }
-
-.profile {
-  width:180px; aspect-ratio:1; opacity:0;
-  transform: translate3d(0, 20px, 0) scale(0.94);
-  clip-path: circle(50% at 50% 50%);
-  transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
-  will-change: transform; z-index:20;
-}
-.profile.show { opacity:1; transform: translate3d(0,0,0) scale(1); }
-.profile.move { position: absolute; transform: translate3d(-38vw, -42vh, 0) scale(0.45); }
-
-.welcome {
-  font-family:"Bebas Neue"; font-size:32px; letter-spacing:3px; margin-top:20px; opacity:0;
-  background:linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  transform: translate3d(0, 20px, 0);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.welcome.show { opacity:1; transform: translate3d(0,0,0); }
-.welcome.freedom { transition: transform 0.1s ease-out; transform: translate3d(0, -50px, 0); }
-
-/* ABOUT SECTION & ANIMATIONS */
-.about {
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  opacity:0; pointer-events:none; width: 80%; max-width: 800px; z-index: 30;
-}
-.about.show { opacity:1; pointer-events:auto; }
-
-/* Typewriter Heading */
-.typewriter {
-  font-family: "Bebas Neue"; font-size: 48px; overflow: hidden; white-space: nowrap;
-  border-right: 3px solid #9fd9f5; width: 0; margin-bottom: 20px;
-}
-.about.show .typewriter {
-  animation: typing 1.5s steps(30, end) forwards, blink .75s step-end infinite;
+:root {
+    --accent: #00d4ff;
+    --blur-intensity: 18px; /* Visual representation of 42% blur */
 }
 
-/* Cubic Bezier Summary */
-.about-text {
-  opacity: 0; transform: translateY(20px);
-}
-.about.show .about-text {
-  opacity: 1; transform: translateY(0);
-  transition: all 1s cubic-bezier(.22,1,.36,1) 1s; /* Starts after typewriter */
+body, html {
+    margin: 0; padding: 0;
+    height: 100vh; width: 100vw;
+    background-color: #000;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
-@keyframes typing { from { width: 0 } to { width: 100% } }
-@keyframes blink { from, to { border-color: transparent } 50% { border-color: #9fd9f5 } }
+/* Background - same for all sections */
+.bg-wrapper {
+    width: 100%; height: 100%;
+    background: url('your-bg.jpg') no-repeat center center/cover;
+    transition: filter 0.4s ease;
+    display: flex; align-items: center; justify-content: center;
+}
 
-/* LOADER, GREETING, TASKBAR (Same as previous optimized versions) */
-.loader { position:fixed; inset:0; background:#0b1116; display:flex; align-items:center; justify-content:center; gap:10px; z-index:40; }
-.loader span { width:10px; height:10px; border-radius:50%; background:#fff; animation: load 1s infinite; }
-@keyframes load { 0%,100%{transform:scale(.6);opacity:.4;} 50%{transform:scale(1);opacity:1;} }
-.loader.hide { opacity:0; pointer-events:none; transition:.4s; }
-.greeting { position:fixed; top:22%; left:50%; transform:translateX(-50%); font-family:"Bebas Neue"; font-size:30px; opacity:0; transition:.6s; }
-.greeting.show { opacity:1; }
-.taskbar { position:fixed; bottom:-80px; left:50%; transform:translateX(-50%); height:56px; padding:0 30px; display:flex; gap:30px; align-items:center; background:rgba(20,40,55,.8); backdrop-filter:blur(10px); border-radius:16px; transition: .6s; z-index:15; }
-.taskbar.show { bottom:20px; }
-.taskbar a { color:#e6eef3c7; text-decoration:none; cursor:pointer; font-size: 14px; }
+/* Profile Pic: Hero Animation Logic */
+.profile-pic {
+    position: absolute;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: url('your-profile.jpg') center/cover;
+    border: 4px solid var(--accent);
+    z-index: 5;
+    transition: all 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.profile-pic.hero-active {
+    top: 40px; left: 40px;
+    width: 85px; height: 85px;
+    transform: translate(0, 0);
+}
+
+/* 4-foot Distance Gap */
+.header-container {
+    position: absolute;
+    top: 65px; left: 220px; /* Specific distance from cornered pic */
+    opacity: 0;
+    transition: opacity 0.5s ease 1.1s;
+}
+.good-morning { color: white; font-size: 24px; font-weight: bold; }
+
+/* Caption: Slide up and Upscale */
+.welcome-caption {
+    position: absolute;
+    bottom: -100px;
+    color: var(--accent);
+    font-size: 4rem;
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+}
+.welcome-caption.animate {
+    bottom: 50%;
+    transform: translateY(50%) scale(1.2);
+    opacity: 1;
+}
+
+/* Taskbar */
+.taskbar {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 12px 40px;
+    border-radius: 40px;
+    display: flex; gap: 30px;
+    z-index: 999;
+}
+.task-item { color: white; cursor: pointer; font-weight: 500; }
+
+/* The Blur Effect Class */
+.is-blurred { filter: blur(var(--blur-intensity)); }
+
+/* Overlay Window */
+.page-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: none; justify-content: center; align-items: center;
+    z-index: 100;
+}
+.page-content {
+    background: rgba(0,0,0,0.7);
+    width: 80%; height: 70%;
+    border-radius: 20px;
+    padding: 40px; color: white;
+    border: 1px solid var(--accent);
+}
+.close-btn { float: right; background: none; color: white; border: none; font-size: 2rem; cursor: pointer; }
