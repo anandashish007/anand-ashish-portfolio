@@ -4,20 +4,57 @@
   <meta charset="UTF-8" />
   <title>Anand Ashish | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- STYLES -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <video class="background" id="bgVideo" autoplay muted loop playsinline>
+
+  <!-- ================= BACKGROUND VIDEO ================= -->
+  <video class="background" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
   </video>
-  <div class="loader" id="loader"><span></span><span></span><span></span></div>
+
+  <!-- ================= LOADER ================= -->
+  <div class="loader" id="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- ================= GREETING ================= -->
   <div class="greeting" id="greeting"></div>
+
+  <!-- ================= INTRO ================= -->
   <div class="intro" id="intro">
     <div class="intro-inner">
-      <img src="profile.jpg" id="profile" class="profile" alt="profile" />
-      <div class="welcome" id="caption">WELCOME TO MY PORTFOLIO</div>
+
+      <!-- PROFILE (GLASS BUBBLE HERO) -->
+      <img
+        src="profile.jpg"
+        id="profile"
+        class="profile"
+        alt="Anand Ashish"
+      />
+
+      <!-- WELCOME TEXT -->
+      <div class="welcome" id="caption">
+        WELCOME TO MY PORTFOLIO
+      </div>
+
     </div>
   </div>
+
+  <!-- ================= TASKBAR ================= -->
   <nav class="taskbar" id="taskbar">
     <a id="homeBtn">HOME</a>
     <a href="projects.html">PROJECTS</a>
@@ -25,15 +62,18 @@
     <a href="certificates.html">CERTIFICATES</a>
     <a id="aboutBtn">ABOUT</a>
   </nav>
-  <section class="about" id="about">
-    <h2 class="typewriter">ABOUT ME</h2>
-    <p class="about-text">
-      I am a dedicated Computer Science Engineering student with a strong academic background and a clear professional vision. My educational journey began at Sidhartha Vidyalaya, where I completed my 10th-grade studies during the 2020–2021 academic year, achieving a distinguished 95% pass percentage. This early success laid a solid foundation for my analytical and technical interests.
-Following my secondary education, I joined Sri Chaitanya Junior College for my intermediate studies, which I successfully completed in 2023. This period was instrumental in sharpening my mathematical and scientific reasoning, ultimately leading me to pursue a career in technology.
-Currently, I am a student at the Eluru College of Engineering and Technology, specializing in Computer Science Engineering. In this environment, I am actively honing my technical skills and building a deep understanding of software systems. My ultimate career goal is to become a Software Engineer, a role where I can apply my problem-solving abilities and engineering knowledge to create innovative software solutions and contribute meaningfully to the tech industry.
-    </p>
-  </section>
-  <script src="script.js"></script>
-</body>
-</html>
 
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+    <h2>ABOUT ME</h2>
+    <p class="about-text">
+      I am a Computer Science and Engineering student with a heart full of ambition
+      and a mind wired for logic. From the first line of code I wrote, I felt drawn
+      to the world of software and innovation.
+
+      I believe technology is not just about machines, but about shaping a better
+      future for people. My goal is to become a successful software engineer who
+      creates meaningful and efficient solutions.
+
+      I am constantly learning new programming languages and improving my
+      problem-solving skills. Challenges motivate me, and failures teach me lessons
