@@ -1,44 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const profile = document.getElementById("profile"),
-        caption = document.getElementById("caption"), // This is the .welcome text
-        loader = document.getElementById("loader"),
-        taskbar = document.getElementById("taskbar"),
-        greeting = document.getElementById("greeting"),
-        bg = document.querySelector(".background"),
-        about = document.getElementById("about"),
-        aboutBtn = document.getElementById("aboutBtn"),
-        homeBtn = document.getElementById("homeBtn");
+  const loader   = document.getElementById("loader");
+  const profile  = document.getElementById("profile");
+  const welcome  = document.getElementById("caption");
+  const taskbar  = document.getElementById("taskbar");
+  const greeting = document.getElementById("greeting");
+  const bg       = document.querySelector(".background");
+  const about    = document.getElementById("about");
+  const aboutBtn = document.getElementById("aboutBtn");
+  const homeBtn  = document.getElementById("homeBtn");
 
-  // Initial Sequence (Summarized)
+  /* GREETING TEXT */
+  const h = new Date().getHours();
+  greeting.textContent =
+    h < 12 ? "GOOD MORNING" :
+    h < 17 ? "GOOD AFTERNOON" :
+    "GOOD EVENING";
+
+  /* INTRO SEQUENCE */
   setTimeout(() => {
     loader.classList.add("hide");
-    setTimeout(() => profile.classList.add("show"), 400);
-    setTimeout(() => caption.classList.add("show"), 900);
+
+    /* profile in */
+    setTimeout(() => {
+      profile.classList.add("show");
+    }, 200);
+
+    /* welcome in (0.1s later) */
+    setTimeout(() => {
+      welcome.classList.add("show");
+    }, 300);
+
+    /* hero move (continuous, no pause) */
     setTimeout(() => {
       profile.classList.add("move");
-      caption.classList.add("freedom");
-    }, 2400);
+    }, 1200);
+
+    /* background + greeting */
     setTimeout(() => {
       bg.classList.add("bg-clear");
       greeting.classList.add("show");
+    }, 1400);
+
+    /* taskbar */
+    setTimeout(() => {
       taskbar.classList.add("show");
-    }, 3000);
-  }, 800);
+    }, 1700);
 
-  // Updated About Toggle
-  aboutBtn.onclick = (e) => {
-    e.preventDefault();
-    about.classList.add("show");
-    bg.classList.add("bg-about");
-    greeting.classList.add("blur"); // Blurs greeting
-    caption.classList.add("blur");  // Blurs Welcome to My Portfolio
-  };
+  }, 1000);
 
-  homeBtn.onclick = (e) => {
-    e.preventDefault();
-    about.classList.remove("show");
-    bg.classList.remove("bg-about");
-    greeting.classList.remove("blur");
-    caption.classList.remove("blur");
-  };
+  /* ABOUT TOGGLE */
+  if (aboutBtn) {
+    aboutBtn.onclick = () => {
+      about.classList.toggle("show");
+      bg.classList.toggle("bg-about");
+      greeting.classList.toggle("blur");
+      welcome.classList.toggle("blur");
+    };
+  }
+
+  if (homeBtn) {
+    homeBtn.onclick = () => {
+      about.classList.remove("show");
+      bg.classList.remove("bg-about");
+      greeting.classList.remove("blur");
+      welcome.classList.remove("blur");
+    };
+  }
 });
