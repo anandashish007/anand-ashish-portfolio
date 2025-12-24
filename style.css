@@ -1,11 +1,20 @@
 /* RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden; background: #0b1116; }
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #e6eef3;
+  overflow-x: hidden;
+  background: #0b1116;
+}
 
 /* BACKGROUND */
 .background {
-  position: fixed; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; transform: scale(1.06);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
   filter: blur(18px) brightness(0.9);
   transition: filter .8s cubic-bezier(.22,1,.36,1);
   z-index: -2;
@@ -15,128 +24,181 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 
 /* LOADER */
 .loader {
-  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-  gap: 10px; z-index: 40; background: #0b1116;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 40;
+  background: #0b1116;
 }
 .loader span {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: rgba(255,255,255,.85); animation: load 1s infinite ease-in-out;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  animation: load 1s infinite ease-in-out;
 }
 .loader span:nth-child(2) { animation-delay: .15s; }
 .loader span:nth-child(3) { animation-delay: .3s; }
-@keyframes load { 0%, 100% { transform: scale(.6); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
+@keyframes load {
+  0%,100% { transform: scale(.6); opacity: .4; }
+  50% { transform: scale(1); opacity: 1; }
+}
 .loader.hide { opacity: 0; pointer-events: none; transition: .4s; }
 
 /* INTRO */
 .intro {
-  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-  z-index: 10; transition: opacity .5s ease;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
-/* Optimized Hero Position Container */
-.intro.moveIntro { pointer-events: none; }
 
+/* INTRO INNER – controls spacing */
 .intro-inner {
-  display: flex; flex-direction: column; align-items: center;
-  position: relative; width: 100%; height: 100%; justify-content: center;
-  gap: 20px;
-  transition: transform 1.0s cubic-bezier(.22,1,.36,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  transform: translateY(-30px);
 }
 
 /* PROFILE */
 .profile {
-  margin-top: 71px;
-  width: 180px; aspect-ratio: 1; opacity: 0;
-  transform: translateY(18px) scale(0.94);
+  width: 180px;
+  aspect-ratio: 1;
+  opacity: 0;
+  transform: translateY(20px) scale(.94);
   clip-path: circle(50% at 50% 50%);
+  transition:
+    opacity .8s cubic-bezier(.22,1,.36,1),
+    transform .8s cubic-bezier(.22,1,.36,1);
+  will-change: transform;
   z-index: 20;
-  will-change: transform, opacity;
-  transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
 }
-.profile.show { opacity: 1; transform: translateY(0) scale(1); }
+.profile.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* HERO MOVE – perfectly synced */
 .profile.move {
-  position: absolute;
-  transform: translate(-38vw, -42vh) scale(0.45);
-  transform-origin: top left;
+  position: fixed;
+  top: 35px;
+  left: 35px;
+  width: 82px;
+  transform: none;
+  clip-path: circle(45% at 50% 50%);
+  transition:
+    width .8s cubic-bezier(.22,1,.36,1),
+    clip-path .8s cubic-bezier(.22,1,.36,1);
 }
 
-/* WELCOME - Blended Blur Logic */
+/* WELCOME */
 .welcome {
-  font-family: "Bebas Neue", sans-serif; font-size: 32px; letter-spacing: 3px;
-  background: linear-gradient(90deg,#e6eef3,#9fd9f5,#e6eef3);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  opacity: 0; transform: translateY(14px) scale(0.8);
-  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-}
-.welcome.show { opacity: 1; transform: translateY(0) scale(1); }
-.welcome.freedom {
-  transition: transform 0.1s ease-out; 
-  transform: translateY(-60px); 
-}
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  letter-spacing: 4px;
+  text-align: center;
+  white-space: nowrap;
 
+  /* translucent glass text */
+  color: rgba(255, 255, 255, 0.45);
+
+  /* spotlight shine */
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.85) 45%,
+    rgba(255,255,255,0.25) 90%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* animation */
+  animation: spotlight 6s ease-in-out infinite;
+
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+    transform 0.8s cubic-bezier(0.22,1,0.36,1);
+
+  z-index: 12;
+}
+.welcome.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* spotlight movement */
+@keyframes spotlight {
+  0%   { background-position: -120% 0; }
+  50%  { background-position: 120% 0; }
+  100% { background-position: 120% 0; }
+}
 /* Blur class for Welcome text when About is open */
 .welcome.blur {
   filter: blur(10px);
   opacity: 0;
   pointer-events: none;
 }
-
-/* UI */
-
-.greeting {
 /* GREETING */
-
-const h = new Date().getHours();
-
-greeting.textContent =
-
-h < 12 ? "GOOD MORNING":
-
-h < 17 ? "GOOD AFTERNOON":
-
-"GOOD EVENING";
-
-const profileInMs = 900; // same as CSS for .profile
-position: fixed; top: 22%; left: 50%;
-
-transform: translate(-50%, 16px);
-
-font-family: "Bebas Neue"; font-size:
-
-30px; opacity: 0; z-index: 5;
-
-transition: .6s cubic-bezier(.22,1,.36,1);
-
+.greeting {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%,16px);
+  font-family: "Bebas Neue";
+  font-size: 30px;
+  opacity: 0;
+  transition: .6s cubic-bezier(.22,1,.36,1);
+}
+.greeting.show {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+.greeting.blur {
+  filter: blur(8px);
+  opacity: 0;
 }
 
-.greeting.show { opacity: 1; transform:
-
-translate(-50%, 0); }
-
-/* Greeting also blurs when About is
-
-open */
-
-.greeting.blur { filter: blur(8px);
-
-opacity: 0; }
-
+/* TASKBAR */
 .taskbar {
-  position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
-  height: 56px; padding: 0 36px; display: flex; gap: 36px; align-items: center;
-  background: rgba(20,40,55,.55); backdrop-filter: blur(18px); border-radius: 16px;
-  transition: bottom .6s cubic-bezier(.22,1,.36,1); z-index: 15;
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 56px;
+  padding: 0 36px;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  background: rgba(20,40,55,.55);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  transition: bottom .6s cubic-bezier(.22,1,.36,1);
 }
 .taskbar.show { bottom: 20px; }
-.taskbar a { color: #e6eef3c7; text-decoration: none; transition: .25s; cursor: pointer; }
 
 /* ABOUT */
 .about {
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  opacity: 0; pointer-events: none; width: 85%; max-width: 900px; z-index: 30;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: .6s ease;
 }
-.about.show { opacity: 1; pointer-events: auto; }
-.about h2 { font-family: "Bebas Neue"; font-size: 48px; overflow: hidden; white-space: nowrap; border-right: 3px solid #9fd9f5; width: 0; }
-.about.show h2 { animation: typing 1.5s steps(30, end) forwards; }
-@keyframes typing { from { width: 0 } to { width: 100% } }
+.about.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
