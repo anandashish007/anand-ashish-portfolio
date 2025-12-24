@@ -81,14 +81,32 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 }
 
 /* UI */
+
 .greeting {
-  position: fixed; top: 22%; left: 50%; transform: translate(-50%, 16px);
-  font-family: "Bebas Neue"; font-size: 30px; opacity: 0; z-index: 5;
-  transition: .6s cubic-bezier(.22,1,.36,1);
+
+position: fixed; top: 22%; left: 50%;
+
+transform: translate(-50%, 16px);
+
+font-family: "Bebas Neue"; font-size:
+
+30px; opacity: 0; z-index: 5;
+
+transition: .6s cubic-bezier(.22,1,.36,1);
+
 }
-.greeting.show { opacity: 1; transform: translate(-50%, 0); }
-/* Greeting blurs when About is open */
-.greeting.blur { filter: blur(8px); opacity: 0; }
+
+.greeting.show { opacity: 1; transform:
+
+translate(-50%, 0); }
+
+/* Greeting also blurs when About is
+
+open */
+
+.greeting.blur { filter: blur(8px);
+
+opacity: 0; }
 
 .taskbar {
   position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
