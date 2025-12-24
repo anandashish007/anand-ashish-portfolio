@@ -67,35 +67,59 @@ body {
   transform: translateY(-30px);
 }
 
-/* PROFILE */
+/* PROFILE – GLASS BUBBLE */
 .profile {
+  margin-top: 72px;
   width: 180px;
   aspect-ratio: 1;
   opacity: 0;
+
   transform: translateY(20px) scale(.94);
+
+  /* glass bubble */
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  /* image mask */
   clip-path: circle(50% at 50% 50%);
+
+  /* glow + shadow */
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    inset 0 0 0 2px rgba(255,255,255,0.35);
+
   transition:
     opacity .8s cubic-bezier(.22,1,.36,1),
     transform .8s cubic-bezier(.22,1,.36,1);
+
   will-change: transform;
   z-index: 20;
 }
+
 .profile.show {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-/* HERO MOVE – perfectly synced */
+/* HERO MOVE – stays bubble, moves clean */
 .profile.move {
   position: fixed;
   top: 35px;
   left: 35px;
   width: 82px;
+
   transform: none;
-  clip-path: circle(45% at 50% 50%);
+
+  clip-path: circle(50% at 50% 50%);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.45),
+    inset 0 0 0 2px rgba(255,255,255,0.4);
+
   transition:
     width .8s cubic-bezier(.22,1,.36,1),
-    clip-path .8s cubic-bezier(.22,1,.36,1);
+    box-shadow .8s cubic-bezier(.22,1,.36,1);
 }
 
 /* WELCOME */
