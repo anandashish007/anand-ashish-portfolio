@@ -83,7 +83,19 @@ body { font-family: "Open Sans", sans-serif; color: #e6eef3; overflow-x: hidden;
 /* UI */
 
 .greeting {
+/* GREETING */
 
+const h = new Date().getHours();
+
+greeting.textContent =
+
+h < 12 ? "GOOD MORNING":
+
+h < 17 ? "GOOD AFTERNOON":
+
+"GOOD EVENING";
+
+const profileInMs = 900; // same as CSS for .profile
 position: fixed; top: 22%; left: 50%;
 
 transform: translate(-50%, 16px);
